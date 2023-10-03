@@ -1,0 +1,539 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="random_data module" href="random_data.html" /><link rel="prev" title="src" href="modules.html" />
+
+    <link rel="shortcut icon" href="../_static/jsontools-icon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>jsontools module</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=da8a7cb0" />
+
+
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+      }
+    }
+  }
+</style></head>
+  <body>
+
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">JSONtools</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/jsontools-logo-optimized.svg" alt="Logo"/>
+  </div>
+
+  <span class="sidebar-brand-text">JSONtools</span>
+
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">src</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">jsontools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_data.html">random_data module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-jsontools">
+<span id="jsontools-module"></span><h1>jsontools module<a class="headerlink" href="#module-jsontools" title="Link to this heading">#</a></h1>
+<p>Module containing functions that simplifies interactions with data structured
+as JSON.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="jsontools.JsonContent">
+<span class="sig-name descname"><span class="pre">JsonContent</span></span><a class="headerlink" href="#jsontools.JsonContent" title="Link to this definition">#</a></dt>
+<dd><p>JSON content type.</p>
+<p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[JsonKey, JsonValue]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="jsontools.JsonKey">
+<span class="sig-name descname"><span class="pre">JsonKey</span></span><a class="headerlink" href="#jsontools.JsonKey" title="Link to this definition">#</a></dt>
+<dd><p>JSON keys are always strings</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="jsontools.JsonValue">
+<span class="sig-name descname"><span class="pre">JsonValue</span></span><a class="headerlink" href="#jsontools.JsonValue" title="Link to this definition">#</a></dt>
+<dd><p>JSON values can be anything from JSON domain</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[JsonKey, JsonValue], <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]], <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>[JsonKey, JsonValue]]]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="jsontools.Scalar">
+<span class="sig-name descname"><span class="pre">Scalar</span></span><a class="headerlink" href="#jsontools.Scalar" title="Link to this definition">#</a></dt>
+<dd><p>Scalar types as they are present in JSON files.</p>
+<p>alias of <code class="xref py py-obj docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.apply_mapping">
+<span class="sig-name descname"><span class="pre">apply_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obs_new_mapping</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#apply_mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.apply_mapping" title="Link to this definition">#</a></dt>
+<dd><p>Searches for keys in <code class="docutils literal notranslate"><span class="pre">obs_new_mapping</span></code> and replace their values with the
+results of calling <code class="docutils literal notranslate"><span class="pre">obs_new_mapping</span></code> value with observed key and value as
+arguments (in that order).</p>
+<p>This function alters <code class="docutils literal notranslate"><span class="pre">json_content</span></code> in situ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_content</strong> (<em>jsontools.JsonContent</em>) – JSON structured content</p></li>
+<li><p><strong>obs_new_mapping</strong> (<em>Mapping</em><em>[</em><em>jsontools.JsonKey</em><em>, </em><em>Callable</em><em>[</em><em>[</em><em>jsontools.JsonKey</em><em>, </em><em>jsontools.JsonValue</em><em>]</em><em>, </em><em>jsontools.JsonValue</em><em>]</em><em>]</em>) – Dictionary that maps each key with the function that
+is used for the replacement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON configuration is modified inplace.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.convert_keys_to_naming_convention">
+<span class="sig-name descname"><span class="pre">convert_keys_to_naming_convention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_nc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snake_case'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_nc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lowerCamelCase'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#convert_keys_to_naming_convention"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.convert_keys_to_naming_convention" title="Link to this definition">#</a></dt>
+<dd><p>Converts JSON with keys written in any supported <code class="xref py py-class docutils literal notranslate"><span class="pre">NamingConvention</span></code>
+to any other supported <code class="xref py py-class docutils literal notranslate"><span class="pre">NamingConvention</span></code>. Use <code class="docutils literal notranslate"><span class="pre">lowerCamelCase</span></code> for
+Energyworx API format.</p>
+<p>This function alters <code class="docutils literal notranslate"><span class="pre">json_content</span></code> in situ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_content</strong> (<em>jsontools.JsonContent</em>) – Content of the JSON file that has to be converted.</p></li>
+<li><p><strong>from_nc</strong> (<em>jsontools.NamingConvention</em>) – Current naming convention of the keys.</p></li>
+<li><p><strong>dest_nc</strong> (<em>jsontools.NamingConvention</em>) – Resulting naming convention of the keys.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON content with keys converted.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.convert_name_to_naming_convention">
+<span class="sig-name descname"><span class="pre">convert_name_to_naming_convention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orig_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'snake_case'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CamelCase'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#convert_name_to_naming_convention"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.convert_name_to_naming_convention" title="Link to this definition">#</a></dt>
+<dd><p>Converts between different naming conventions. Currently supports:
+<code class="xref py py-class docutils literal notranslate"><span class="pre">NamingConvention</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name to be converted</p></li>
+<li><p><strong>orig_mode</strong> (<em>Literal</em>) – Current naming convention of <code class="docutils literal notranslate"><span class="pre">name</span></code> (see
+supported ones). Defaults to ‘snake_case’.</p></li>
+<li><p><strong>dest_mode</strong> (<em>Literal</em>) – Desired naming convention for <code class="docutils literal notranslate"><span class="pre">name</span></code> (see
+supported ones). Defaults to ‘CamelCase’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Name converted to <code class="docutils literal notranslate"><span class="pre">dest_mode</span></code> naming convention</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_name_to_naming_convention</span><span class="p">(</span><span class="s1">&#39;hello_world&#39;</span><span class="p">)</span>
+<span class="go">&#39;HelloWorld&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_name_to_naming_convention</span><span class="p">(</span><span class="s1">&#39;hello_world&#39;</span><span class="p">,</span> <span class="n">dest_mode</span><span class="o">=</span><span class="s1">&#39;lowerCamelCase&#39;</span><span class="p">)</span>
+<span class="go">&#39;helloWorld&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_name_to_naming_convention</span><span class="p">(</span><span class="s1">&#39;hello_world&#39;</span><span class="p">,</span> <span class="n">dest_mode</span><span class="o">=</span><span class="s1">&#39;Display Name&#39;</span><span class="p">)</span>
+<span class="go">&#39;Hello World&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">convert_name_to_naming_convention</span><span class="p">(</span><span class="s1">&#39;HelloWorld&#39;</span><span class="p">,</span> <span class="s1">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">)</span>
+<span class="go">&#39;hello_world&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.edit">
+<span class="sig-name descname"><span class="pre">edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matcher</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#edit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.edit" title="Link to this definition">#</a></dt>
+<dd><p>Add a new field for each key of the <code class="docutils literal notranslate"><span class="pre">obs_keys</span></code> found in the JSON using
+<code class="docutils literal notranslate"><span class="pre">obs_new_mapping</span></code> on the observed key and value to generate the new field
+key and value.</p>
+<p>This function alters <code class="docutils literal notranslate"><span class="pre">json_value</span></code> in situ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_value</strong> (<em>jsontools.JsonValue</em>) – JSON structured content</p></li>
+<li><p><strong>matcher</strong> (<em>Callable</em><em>[</em><em>[</em><em>jsontools.JsonKey</em><em>, </em><em>jsontools.JsonValue</em><em>]</em><em>, </em><em>bool</em><em>]</em>) – Function that takes JSON key and value as arguments and
+returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if this pair is a match, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise</p></li>
+<li><p><strong>converter</strong> (<em>Callable</em><em>[</em><em>[</em><em>jsontools.JsonKey</em><em>, </em><em>jsontools.JsonValue</em><em>]</em><em>, </em><em>Iterator</em><em>[</em><em>tuple</em><em>[</em><em>jsontools.JsonKey</em><em>, </em><em>jsontools.JsonValue</em><em>]</em><em>]</em><em>]</em>) – Function that takes JSON key and value as arguments and
+yields JSON key and value pairs to incorporate to JSON content</p></li>
+<li><p><strong>drop</strong> (<em>bool</em>) – Flag indicating if matched key-value pair should be removed or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON content is modified inplace</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.extract_typed_dict">
+<span class="sig-name descname"><span class="pre">extract_typed_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#extract_typed_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.extract_typed_dict" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_content</strong> (<em>jsontools.JsonContent</em>) – </p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>jsontools.JsonContent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.flatten" title="Link to this definition">#</a></dt>
+<dd><p>Traverses a nested JSON file returning every key-value pair found,
+formatting keys by their path, from the shallowest to the deepest levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_value</strong> (<em>jsontools.JsonValue</em>) – Any JSON structured content</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>2-Tuples of path to key and its associated value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[tuple[jsontools.JsonKey, jsontools.JsonValue]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.one_or_many">
+<span class="sig-name descname"><span class="pre">one_or_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#one_or_many"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.one_or_many" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to adap functions that modify a <a class="reference internal" href="#jsontools.JsonContent" title="jsontools.JsonContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonContent</span></code></a> to allow
+them take also a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">JsonConfig</span></code>s.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> (<em>Callable</em><em>[</em><em>[</em><em>JsonContent</em><em>, </em><em>Variant</em><em>]</em><em>, </em><em>None</em><em>]</em>) – Function that takes a <a class="reference internal" href="#jsontools.JsonContent" title="jsontools.JsonContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonContent</span></code></a> as first argument and
+modifies it inplace.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Function that can take either a <a class="reference internal" href="#jsontools.JsonContent" title="jsontools.JsonContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonContent</span></code></a> or a list of
+<a class="reference internal" href="#jsontools.JsonContent" title="jsontools.JsonContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonContent</span></code></a> as first argument. If it is a list, original
+function is applied to each item.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[JsonContent | list[JsonContent], Variant], None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_content</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.search" title="Link to this definition">#</a></dt>
+<dd><p>Looks recursively in a JSON file for given fields. If <code class="docutils literal notranslate"><span class="pre">all_</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>
+only matches from internal structures that contain all fields are returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_content</strong> (<em>jsontools.JsonContent</em>) – JSON structured content</p></li>
+<li><p><strong>*fields</strong> (<em>str</em>) – All the fields that are going to be extracted from the JSON</p></li>
+<li><p><strong>all</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code> only yields when all fields has been found. Otherwise
+yields when any field has been found</p></li>
+<li><p><strong>all_</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionaries of found keys and values each time one JSON structure is
+encountered</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[dict[jsontools.JsonKey, list[jsontools.JsonValue]]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="jsontools.walk_structures">
+<span class="sig-name descname"><span class="pre">walk_structures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/jsontools.html#walk_structures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jsontools.walk_structures" title="Link to this definition">#</a></dt>
+<dd><p>Traverses a nested JSON file returning every dictionary found from
+shallowest to deepest levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_value</strong> (<em>jsontools.JsonValue</em>) – JSON structured content</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em>) – Maximun depth of the structure returned, each time a dictionary
+is scanned depth level is raised</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>Each JSON structure found in the given JSON, including given,
+<code class="docutils literal notranslate"><span class="pre">json_value</span></code> at first place, one by one</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[jsontools.JsonContent]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+
+        <div class="related-pages">
+          <a class="next-page" href="random_data.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">random_data module</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="modules.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+
+                <div class="title">src</div>
+
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Santiago B. Pérez Pita
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+
+          </div>
+          <div class="right-details">
+
+          </div>
+        </div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+
+
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">jsontools module</a><ul>
+<li><a class="reference internal" href="#jsontools.JsonContent"><code class="docutils literal notranslate"><span class="pre">JsonContent</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.JsonKey"><code class="docutils literal notranslate"><span class="pre">JsonKey</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.JsonValue"><code class="docutils literal notranslate"><span class="pre">JsonValue</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.Scalar"><code class="docutils literal notranslate"><span class="pre">Scalar</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.apply_mapping"><code class="docutils literal notranslate"><span class="pre">apply_mapping()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.convert_keys_to_naming_convention"><code class="docutils literal notranslate"><span class="pre">convert_keys_to_naming_convention()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.convert_name_to_naming_convention"><code class="docutils literal notranslate"><span class="pre">convert_name_to_naming_convention()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.edit"><code class="docutils literal notranslate"><span class="pre">edit()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.extract_typed_dict"><code class="docutils literal notranslate"><span class="pre">extract_typed_dict()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.flatten"><code class="docutils literal notranslate"><span class="pre">flatten()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.one_or_many"><code class="docutils literal notranslate"><span class="pre">one_or_many()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.search"><code class="docutils literal notranslate"><span class="pre">search()</span></code></a></li>
+<li><a class="reference internal" href="#jsontools.walk_structures"><code class="docutils literal notranslate"><span class="pre">walk_structures()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+
+
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

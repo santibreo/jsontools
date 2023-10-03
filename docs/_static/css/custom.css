@@ -1,0 +1,30 @@
+h1 {
+  word-wrap: break-word;
+}
+
+section p {
+  text-align: justify;
+}
+
+.math-wrapper {
+  overflow-y: hidden;
+}
+
+span.sidebar-brand-text {
+  display: none;
+}
+
+body:not([data-theme=light]) img.sidebar-logo {
+  filter: unset;
+}
+
+
+body img.sidebar-logo {
+  filter: invert(0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme=light]) img.sidebar-logo {
+    filter: unset;
+  }
+}

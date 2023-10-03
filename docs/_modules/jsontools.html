@@ -1,0 +1,992 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <link rel="shortcut icon" href="../_static/jsontools-icon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>jsontools</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=da8a7cb0" />
+
+
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+      }
+    }
+  }
+</style></head>
+  <body>
+
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">JSONtools</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/jsontools-logo-optimized.svg" alt="Logo"/>
+  </div>
+
+  <span class="sidebar-brand-text">JSONtools</span>
+
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../src/modules.html">src</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../src/jsontools.html">jsontools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../src/random_data.html">random_data module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for jsontools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module containing functions that simplifies interactions with data structured</span>
+<span class="sd">as JSON.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterator</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+
+<span class="c1"># Typing</span>
+<span class="n">Variant</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;Variant&#39;</span><span class="p">)</span>
+<span class="n">Scalar</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;Scalar types as they are present in JSON files.&quot;&quot;&quot;</span>
+<span class="c1"># Recursive types for JSONs</span>
+<span class="n">JsonContent</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">[</span><span class="s1">&#39;JsonKey&#39;</span><span class="p">,</span> <span class="s1">&#39;JsonValue&#39;</span><span class="p">]</span>
+<span class="sd">&quot;&quot;&quot;JSON content type.&quot;&quot;&quot;</span>
+<span class="n">JsonKey</span> <span class="o">=</span> <span class="nb">str</span>
+<span class="s1">&#39;JSON keys are always strings&#39;</span>
+<span class="n">JsonValue</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">Scalar</span><span class="p">,</span> <span class="n">JsonContent</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">Scalar</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonContent</span><span class="p">]]</span>
+<span class="s1">&#39;JSON values can be anything from JSON domain&#39;</span>
+<span class="n">NamingConvention</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;CamelCase&#39;</span><span class="p">,</span> <span class="s1">&#39;lowerCamelCase&#39;</span><span class="p">,</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">,</span> <span class="s1">&#39;Display Name&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="convert_name_to_naming_convention">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.convert_name_to_naming_convention">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_name_to_naming_convention</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">orig_mode</span><span class="p">:</span> <span class="n">NamingConvention</span> <span class="o">=</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">,</span>
+    <span class="n">dest_mode</span><span class="p">:</span> <span class="n">NamingConvention</span> <span class="o">=</span> <span class="s1">&#39;CamelCase&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Converts between different naming conventions. Currently supports:</span>
+<span class="sd">    :class:`NamingConvention`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (str): Name to be converted</span>
+<span class="sd">        orig_mode (Literal): Current naming convention of ``name`` (see</span>
+<span class="sd">            supported ones). Defaults to &#39;snake_case&#39;.</span>
+<span class="sd">        dest_mode (Literal): Desired naming convention for ``name`` (see</span>
+<span class="sd">            supported ones). Defaults to &#39;CamelCase&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Name converted to ``dest_mode`` naming convention</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">        &gt;&gt;&gt; convert_name_to_naming_convention(&#39;hello_world&#39;)</span>
+<span class="sd">        &#39;HelloWorld&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; convert_name_to_naming_convention(&#39;hello_world&#39;, dest_mode=&#39;lowerCamelCase&#39;)</span>
+<span class="sd">        &#39;helloWorld&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; convert_name_to_naming_convention(&#39;hello_world&#39;, dest_mode=&#39;Display Name&#39;)</span>
+<span class="sd">        &#39;Hello World&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; convert_name_to_naming_convention(&#39;HelloWorld&#39;, &#39;CamelCase&#39;, &#39;snake_case&#39;)</span>
+<span class="sd">        &#39;hello_world&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">remove_underline_and_uppercase_next_character</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes underlines and uppercase following character.&quot;&quot;&quot;</span>
+        <span class="n">return_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">string</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;_\w&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <span class="n">return_str</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span>
+                <span class="k">match</span><span class="o">.</span><span class="n">group</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+                <span class="n">return_str</span><span class="p">,</span>
+                <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">return_str</span>
+
+    <span class="c1"># Any name convention converted to snake_case</span>
+    <span class="k">if</span> <span class="n">orig_mode</span> <span class="o">==</span> <span class="s1">&#39;CamelCase&#39;</span><span class="p">:</span>
+        <span class="n">name_snake_case</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Z])&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;_\1&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">orig_mode</span> <span class="o">==</span> <span class="s1">&#39;lowerCamelCase&#39;</span><span class="p">:</span>
+        <span class="n">name_snake_case</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Z])&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;_\1&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">orig_mode</span> <span class="o">==</span> <span class="s1">&#39;Display Name&#39;</span><span class="p">:</span>
+        <span class="n">name_snake_case</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">orig_mode</span> <span class="o">==</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">:</span>
+        <span class="n">name_snake_case</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown naming convention </span><span class="si">{</span><span class="n">orig_mode</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># From snake_case to destination naming convention</span>
+    <span class="k">if</span> <span class="n">dest_mode</span> <span class="o">==</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">name_snake_case</span>
+    <span class="k">if</span> <span class="n">dest_mode</span> <span class="o">==</span> <span class="s1">&#39;CamelCase&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">remove_underline_and_uppercase_next_character</span><span class="p">(</span>
+            <span class="n">name_snake_case</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">dest_mode</span> <span class="o">==</span> <span class="s1">&#39;lowerCamelCase&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">remove_underline_and_uppercase_next_character</span><span class="p">(</span><span class="n">name_snake_case</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dest_mode</span> <span class="o">==</span> <span class="s1">&#39;Display Name&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">name_snake_case</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown naming convention </span><span class="si">{</span><span class="n">dest_mode</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="one_or_many">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.one_or_many">[docs]</a>
+<span class="k">def</span> <span class="nf">one_or_many</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">JsonContent</span><span class="p">,</span> <span class="n">Variant</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">JsonContent</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonContent</span><span class="p">],</span> <span class="n">Variant</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Decorator to adap functions that modify a :class:`JsonContent` to allow</span>
+<span class="sd">    them take also a list of :class:`JsonConfig`\ s.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        func: Function that takes a :class:`JsonContent` as first argument and</span>
+<span class="sd">            modifies it inplace.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Function that can take either a :class:`JsonContent` or a list of</span>
+<span class="sd">        :class:`JsonContent` as first argument. If it is a list, original</span>
+<span class="sd">        function is applied to each item.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">inner_func</span><span class="p">(</span>
+        <span class="n">json_content</span><span class="p">:</span> <span class="n">JsonContent</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonContent</span><span class="p">],</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invalid JSON: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">json_content</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">json_item</span> <span class="ow">in</span> <span class="n">json_content</span><span class="p">:</span>
+                <span class="n">func</span><span class="p">(</span><span class="n">json_item</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">inner_func</span></div>
+
+
+
+<div class="viewcode-block" id="flatten">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.flatten">[docs]</a>
+<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span>
+    <span class="n">json_value</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span>
+    <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Traverses a nested JSON file returning every key-value pair found,</span>
+<span class="sd">    formatting keys by their path, from the shallowest to the deepest levels.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_value: Any JSON structured content</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        2-Tuples of path to key and its associated value</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">json_value</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_prefix</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">/&#39;</span> <span class="k">if</span> <span class="n">prefix</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">key</span>
+            <span class="k">yield</span> <span class="n">new_prefix</span><span class="p">,</span> <span class="n">val</span>
+            <span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">new_prefix</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">inner_config</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">json_value</span><span class="p">):</span>
+            <span class="n">new_prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">]&#39;</span>
+            <span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span><span class="n">inner_config</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">new_prefix</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="walk_structures">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.walk_structures">[docs]</a>
+<span class="k">def</span> <span class="nf">walk_structures</span><span class="p">(</span>
+    <span class="n">json_value</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">JsonContent</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Traverses a nested JSON file returning every dictionary found from</span>
+<span class="sd">    shallowest to deepest levels.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_value: JSON structured content</span>
+<span class="sd">        max_depth: Maximun depth of the structure returned, each time a dictionary</span>
+<span class="sd">            is scanned depth level is raised</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        Each JSON structure found in the given JSON, including given,</span>
+<span class="sd">        ``json_value`` at first place, one by one</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">inner_walk_structures</span><span class="p">(</span>
+        <span class="n">json_value</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span>
+        <span class="n">current_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">JsonContent</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">max_depth</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">current_depth</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">json_value</span>
+            <span class="k">for</span> <span class="n">json_value</span> <span class="ow">in</span> <span class="n">json_value</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">yield from</span> <span class="n">inner_walk_structures</span><span class="p">(</span>
+                    <span class="n">json_value</span><span class="p">,</span>
+                    <span class="n">current_depth</span><span class="o">=</span><span class="n">current_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">json_value</span> <span class="ow">in</span> <span class="n">json_value</span><span class="p">:</span>
+                <span class="k">yield from</span> <span class="n">inner_walk_structures</span><span class="p">(</span>
+                    <span class="n">json_value</span><span class="p">,</span>
+                    <span class="n">current_depth</span><span class="o">=</span><span class="n">current_depth</span><span class="p">,</span>
+                    <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">inner_walk_structures</span><span class="p">(</span><span class="n">json_value</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="n">max_depth</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="search">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.search">[docs]</a>
+<span class="k">def</span> <span class="nf">search</span><span class="p">(</span>
+    <span class="n">json_content</span><span class="p">:</span> <span class="n">JsonContent</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">fields</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">all_</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonValue</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Looks recursively in a JSON file for given fields. If ``all_`` is ``True``</span>
+<span class="sd">    only matches from internal structures that contain all fields are returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_content: JSON structured content</span>
+<span class="sd">        \*fields: All the fields that are going to be extracted from the JSON</span>
+<span class="sd">        all_: If ``True`` only yields when all fields has been found. Otherwise</span>
+<span class="sd">            yields when any field has been found</span>
+
+<span class="sd">    Yields:</span>
+<span class="sd">        Dictionaries of found keys and values each time one JSON structure is</span>
+<span class="sd">        encountered</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">single_query</span><span class="p">(</span>
+        <span class="n">field</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">json_struct</span><span class="p">:</span> <span class="n">JsonContent</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonValue</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Searches fields at different nested levels (considering &#39;.&#39; as nest</span>
+<span class="sd">        level separator)&quot;&quot;&quot;</span>
+        <span class="n">field_parts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">strip</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)))</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">field_parts</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">field_value</span><span class="p">:</span> <span class="n">JsonValue</span> <span class="o">=</span> <span class="n">json_struct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">field_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">field_value</span><span class="p">]</span>
+        <span class="c1"># Final iteration</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">field_parts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="p">[</span><span class="n">json_struct</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">field_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="n">field_values</span>
+        <span class="c1"># Middle iteration</span>
+        <span class="k">if</span> <span class="n">field_value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">):</span>
+            <span class="n">_</span><span class="p">,</span> <span class="o">*</span><span class="n">inner_structs</span> <span class="o">=</span> <span class="n">walk_structures</span><span class="p">(</span><span class="n">json_struct</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">field_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">field_values</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field_value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">inner_structs</span> <span class="o">=</span> <span class="p">[</span><span class="n">field_value</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">inner_structs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">walk_structures</span><span class="p">(</span><span class="n">field_value</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">result</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonValue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">inner_struct</span> <span class="ow">in</span> <span class="n">inner_structs</span><span class="p">:</span>
+            <span class="n">inner_found</span><span class="p">,</span> <span class="n">inner_result</span> <span class="o">=</span> <span class="n">single_query</span><span class="p">(</span>
+                <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">field_parts</span><span class="p">),</span>
+                <span class="n">inner_struct</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">inner_found</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">inner_result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="n">result</span>
+
+    <span class="c1"># If _all require all fields to be defined, otherwise at least one</span>
+    <span class="n">check</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">bool</span><span class="p">]],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span> <span class="k">if</span> <span class="n">all_</span> <span class="k">else</span> <span class="nb">any</span>
+    <span class="k">for</span> <span class="n">json_struct</span> <span class="ow">in</span> <span class="n">walk_structures</span><span class="p">(</span><span class="n">json_content</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">JsonValue</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+            <span class="n">found</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">single_query</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">json_struct</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="p">(</span><span class="n">field</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">field</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span> <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="edit">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.edit">[docs]</a>
+<span class="k">def</span> <span class="nf">edit</span><span class="p">(</span>
+    <span class="n">json_value</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">,</span>
+    <span class="n">matcher</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">],</span> <span class="nb">bool</span><span class="p">],</span>
+    <span class="n">converter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">],</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]]],</span>
+    <span class="n">drop</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Add a new field for each key of the ``obs_keys`` found in the JSON using</span>
+<span class="sd">    ``obs_new_mapping`` on the observed key and value to generate the new field</span>
+<span class="sd">    key and value.</span>
+
+<span class="sd">    This function alters ``json_value`` in situ.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_value: JSON structured content</span>
+<span class="sd">        matcher: Function that takes JSON key and value as arguments and</span>
+<span class="sd">            returns ``True`` if this pair is a match, ``False`` otherwise</span>
+<span class="sd">        converter: Function that takes JSON key and value as arguments and</span>
+<span class="sd">            yields JSON key and value pairs to incorporate to JSON content</span>
+<span class="sd">        drop: Flag indicating if matched key-value pair should be removed or not</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ``None``: JSON content is modified inplace</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">json_struct</span> <span class="ow">in</span> <span class="n">walk_structures</span><span class="p">(</span><span class="n">json_value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_struct</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">matcher</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">drop</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">json_struct</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">new_key</span><span class="p">,</span> <span class="n">new_val</span> <span class="ow">in</span> <span class="n">converter</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+                <span class="n">json_struct</span><span class="p">[</span><span class="n">new_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_val</span></div>
+
+
+
+<div class="viewcode-block" id="apply_mapping">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.apply_mapping">[docs]</a>
+<span class="nd">@one_or_many</span>
+<span class="k">def</span> <span class="nf">apply_mapping</span><span class="p">(</span>
+    <span class="n">json_content</span><span class="p">:</span> <span class="n">JsonContent</span><span class="p">,</span>
+    <span class="n">obs_new_mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">],</span> <span class="n">JsonValue</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Searches for keys in ``obs_new_mapping`` and replace their values with the</span>
+<span class="sd">    results of calling ``obs_new_mapping`` value with observed key and value as</span>
+<span class="sd">    arguments (in that order).</span>
+
+<span class="sd">    This function alters ``json_content`` in situ.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_content: JSON structured content</span>
+<span class="sd">        obs_new_mapping: Dictionary that maps each key with the function that</span>
+<span class="sd">            is used for the replacement.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ``None``: JSON configuration is modified inplace.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">json_struct</span> <span class="ow">in</span> <span class="n">walk_structures</span><span class="p">(</span><span class="n">json_content</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">obs_new_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">json_struct</span><span class="p">:</span>
+                <span class="n">obs_val</span> <span class="o">=</span> <span class="n">json_struct</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">json_struct</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">obs_val</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="convert_keys_to_naming_convention">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.convert_keys_to_naming_convention">[docs]</a>
+<span class="nd">@one_or_many</span>
+<span class="k">def</span> <span class="nf">convert_keys_to_naming_convention</span><span class="p">(</span>
+    <span class="n">json_content</span><span class="p">:</span> <span class="n">JsonContent</span><span class="p">,</span>
+    <span class="n">from_nc</span><span class="p">:</span> <span class="n">NamingConvention</span> <span class="o">=</span> <span class="s1">&#39;snake_case&#39;</span><span class="p">,</span>
+    <span class="n">dest_nc</span><span class="p">:</span> <span class="n">NamingConvention</span> <span class="o">=</span> <span class="s1">&#39;lowerCamelCase&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts JSON with keys written in any supported :class:`NamingConvention`</span>
+<span class="sd">    to any other supported :class:`NamingConvention`. Use ``lowerCamelCase`` for</span>
+<span class="sd">    Energyworx API format.</span>
+
+<span class="sd">    This function alters ``json_content`` in situ.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        json_content: Content of the JSON file that has to be converted.</span>
+<span class="sd">        from_nc: Current naming convention of the keys.</span>
+<span class="sd">        dest_nc: Resulting naming convention of the keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        JSON content with keys converted.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">convert_keys</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">JsonValue</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">JsonKey</span><span class="p">,</span> <span class="n">JsonValue</span><span class="p">]]:</span>
+        <span class="k">yield</span> <span class="n">convert_name_to_naming_convention</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">from_nc</span><span class="p">,</span> <span class="n">dest_nc</span><span class="p">),</span> <span class="n">val</span>
+
+    <span class="n">edit</span><span class="p">(</span><span class="n">json_content</span><span class="p">,</span> <span class="n">matcher</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">_</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="n">converter</span><span class="o">=</span><span class="n">convert_keys</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="extract_typed_dict">
+<a class="viewcode-back" href="../src/jsontools.html#jsontools.extract_typed_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">extract_typed_dict</span><span class="p">(</span><span class="n">json_content</span><span class="p">:</span> <span class="n">JsonContent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JsonContent</span><span class="p">:</span>
+    <span class="c1"># TODO Santi: Implement this method</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;This method is not implemented yet&#39;</span><span class="p">)</span></div>
+
+
+
+<span class="c1">#  # This function dumps a rule to a Python file</span>
+<span class="c1">#  def dump_rule_py(rule: dict, dirname: Path, filename: str | Path) -&gt; None:</span>
+<span class="c1">#      &quot;&quot;&quot;Dumps a rule to a ``.py`` file from ``codeBlob`` field&quot;&quot;&quot;</span>
+<span class="c1">#      dirname.mkdir(parents=True, exist_ok=True)</span>
+<span class="c1">#      with open(dirname / filename, &quot;w&quot;, encoding=&quot;latin-1&quot;) as file:</span>
+<span class="c1">#          file.write(rule[&quot;codeBlob&quot;])</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function loads a rule from a Python file</span>
+<span class="c1">#  def load_py(filename: str | Path) -&gt; str:</span>
+<span class="c1">#      &quot;&quot;&quot;Loads a ``.py`` file as string&quot;&quot;&quot;</span>
+<span class="c1">#      with open(filename, &quot;r&quot;, encoding=&quot;latin-1&quot;) as file:</span>
+<span class="c1">#          code_blob = file.read()</span>
+<span class="c1">#      return code_blob</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # %% RULES MANIPULATION FUNCTIONS</span>
+<span class="c1">#  RULE_PARAMS_DEFAULTS = load_json(</span>
+<span class="c1">#      _PACKAGE_DATA_PATH / &quot;schemas/rule_param_templates.json&quot;</span>
+<span class="c1">#  )</span>
+<span class="c1">#  RULE_API_DEFAULT_JSON = load_json(</span>
+<span class="c1">#      _PACKAGE_DATA_PATH / &quot;schemas/rule_template.json&quot;</span>
+<span class="c1">#  )</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function extracts argument name, type and description from function docstring</span>
+<span class="c1">#  def arg_name_type_and_desc_from_docstring(</span>
+<span class="c1">#      args_docstring: str, regexp: str = r&quot;&quot;</span>
+<span class="c1">#  ) -&gt; Generator[tuple[str, Union[str, None], str], None, None]:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Extracts each argument with its type from python docstring google formatted</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          args_docstring (str): Docstring that contains the arguments description.</span>
+<span class="c1">#</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#          Generator[tuple[str, str]]: Tuples of argument-name and argument-type and</span>
+<span class="c1">#              argument-description</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      pattern = re.compile(</span>
+<span class="c1">#          regexp</span>
+<span class="c1">#          or r&quot;^\s+(?P&lt;name&gt;[*\\\w]+)\s?(?P&lt;type&gt;\([\w\[\]]+\))?:(?P&lt;doc&gt;.*)&quot;</span>
+<span class="c1">#      )</span>
+<span class="c1">#      arg_name, arg_type, arg_doc = &quot;&quot;, &quot;&quot;, &quot;&quot;</span>
+<span class="c1">#      for line in args_docstring.splitlines():</span>
+<span class="c1">#          # Ignore empty lines</span>
+<span class="c1">#          if line.replace(&quot; &quot;, &quot;&quot;) == &quot;&quot;:</span>
+<span class="c1">#              # arg_name, arg_type, arg_doc = &quot;&quot;, &quot;&quot;, &quot;&quot;</span>
+<span class="c1">#              continue</span>
+<span class="c1">#          # Complete description when it is long</span>
+<span class="c1">#          if (match := re.match(pattern, line)) is None:</span>
+<span class="c1">#              arg_doc += f&quot; {line.strip()}&quot;</span>
+<span class="c1">#              continue</span>
+<span class="c1">#          # Yield previous argument</span>
+<span class="c1">#          if arg_name != &quot;&quot;:</span>
+<span class="c1">#              yield arg_name, arg_type, arg_doc.strip()</span>
+<span class="c1">#          # Populate new argument</span>
+<span class="c1">#          arg_name, arg_type, arg_doc = map(match.group, (&quot;name&quot;, &quot;type&quot;, &quot;doc&quot;))</span>
+<span class="c1">#          # Clean argument type if defined</span>
+<span class="c1">#          if arg_type is not None:</span>
+<span class="c1">#              arg_type = re.sub(r&quot;(\(|\))&quot;, &quot;&quot;, arg_type).strip()</span>
+<span class="c1">#      # Yield last argument (if not yielded yet)</span>
+<span class="c1">#      if arg_name != &quot;&quot;:</span>
+<span class="c1">#          yield arg_name, arg_type, arg_doc.strip()</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function extracts name, type and default value from function signature</span>
+<span class="c1">#  def arg_name_type_and_default_from_signature(</span>
+<span class="c1">#      signature: str, skip_self: bool = True, skip_starred: bool = True</span>
+<span class="c1">#  ) -&gt; Generator[tuple[str, Union[str, None], Union[str, None]], None, None]:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Extracts each argument name with its type and default value from function</span>
+<span class="c1">#      signature. Default is returned as string, if no default None is returned</span>
+<span class="c1">#      instead. If no type is provided for the argument, None is also returned.</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          signature (str): Function signature.</span>
+<span class="c1">#          skip_self (bool): Determines if &#39;self&#39; and &#39;cls&#39; arguments should be</span>
+<span class="c1">#              skipped when analysing class methods.</span>
+<span class="c1">#          skip_starred (bool): Determines if arguments begining with a star (&#39;*&#39;)</span>
+<span class="c1">#              should be skipped.</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#          Generator[tuple[str, str | None, str | None]]: Tuples of argument-name,</span>
+<span class="c1">#              argument-type and argument-default. All as strings except when type</span>
+<span class="c1">#              or default are not defined (when not define they are None).</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      for arg in re.split(r&quot;\s?,\s?&quot;, signature):</span>
+<span class="c1">#          rest, *arg_default = arg.split(&quot;=&quot;)</span>
+<span class="c1">#          arg_name, *arg_type = rest.split(&quot;:&quot;)</span>
+<span class="c1">#          if skip_self and any(x in arg_name for x in (&quot;self&quot;, &quot;cls&quot;)):</span>
+<span class="c1">#              continue</span>
+<span class="c1">#          if skip_starred and arg_name.strip().startswith(&quot;*&quot;):</span>
+<span class="c1">#              continue</span>
+<span class="c1">#          yield (</span>
+<span class="c1">#              arg_name.strip(),</span>
+<span class="c1">#              arg_type[0].strip() if arg_type else None,</span>
+<span class="c1">#              re.sub(r&quot;(\&quot;|&#39;)&quot;, &quot;&quot;, arg_default[0].strip())</span>
+<span class="c1">#              if arg_default</span>
+<span class="c1">#              else None,</span>
+<span class="c1">#          )</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # THis function extracts arguments information from function docstring</span>
+<span class="c1">#  def process_args_from_function_docstring(</span>
+<span class="c1">#      func_doc: str, func_sig: str</span>
+<span class="c1">#  ) -&gt; Generator[tuple[str, dict[str, str]], None, None]:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Extracts arguments name, type, default value and description from function</span>
+<span class="c1">#      docstring google formatted (arguments are described between &#39;Args:&#39; and</span>
+<span class="c1">#      &#39;Returns:&#39; lines) and function signature.</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          func_doc: Function docstring.</span>
+<span class="c1">#          func_sig: Function signature.</span>
+<span class="c1">#</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#           2-Tuples of argument type and dictionary with argument attributes</span>
+<span class="c1">#           required by Energyworx API.</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      try:</span>
+<span class="c1">#          func_params_doc = func_doc.split(&quot;Args:&quot;)[1].split(&quot;Returns:&quot;)[0]</span>
+<span class="c1">#      except AttributeError:</span>
+<span class="c1">#          raise ValueError(f&quot;Cannot extract arguments information from docstring&quot;)</span>
+<span class="c1">#      # Dictionary [arg_name, tuple[arg_type, arg_desc]]</span>
+<span class="c1">#      args_from_doc = dict(</span>
+<span class="c1">#          (</span>
+<span class="c1">#              (x, y)</span>
+<span class="c1">#              for x, *y in arg_name_type_and_desc_from_docstring(func_params_doc)</span>
+<span class="c1">#          )</span>
+<span class="c1">#      )</span>
+<span class="c1">#      # Create parameters dictionaries (signature has higher priority)</span>
+<span class="c1">#      args_from_sig = arg_name_type_and_default_from_signature(func_sig)</span>
+<span class="c1">#      for arg_name, arg_type, arg_default in args_from_sig:</span>
+<span class="c1">#          # If arg_type is not defined in signature take it from docstring</span>
+<span class="c1">#          if arg_type is None:</span>
+<span class="c1">#              arg_type = args_from_doc[arg_name][0]</span>
+<span class="c1">#          # Argument type must be defined</span>
+<span class="c1">#          if arg_type is None:</span>
+<span class="c1">#              raise AttributeError(f&quot;{arg_name!r} has not type defined&quot;)</span>
+<span class="c1">#          arg_dict = {</span>
+<span class="c1">#              &quot;name&quot;: arg_name,</span>
+<span class="c1">#              &quot;displayName&quot;: convert_name_to_naming_convention(</span>
+<span class="c1">#                  arg_name, &quot;snake_case&quot;, &quot;Standard Display Name&quot;</span>
+<span class="c1">#              ),</span>
+<span class="c1">#              &quot;description&quot;: args_from_doc[arg_name][1],</span>
+<span class="c1">#          }</span>
+<span class="c1">#          # Add default value (as string) if defined</span>
+<span class="c1">#          if arg_default is not None:</span>
+<span class="c1">#              arg_dict[&quot;defaultValue&quot;] = arg_default</span>
+<span class="c1">#          yield arg_type, arg_dict</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function processes Rule apply method</span>
+<span class="c1">#  def process_apply_function_abstract_node(</span>
+<span class="c1">#      func_asn: ast.FunctionDef,</span>
+<span class="c1">#  ) -&gt; dict[str, Any]:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Extracts description and every parameter config from apply function abstract</span>
+<span class="c1">#      node.</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          func_an (ast.FunctionDef): ``apply`` method of the rule class abstract</span>
+<span class="c1">#              node</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#          dict[str, Any]: Dictionary with the description found in apply docstring</span>
+<span class="c1">#              and the params config as Energyworx API rule fields</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      func_info = dict()</span>
+<span class="c1">#      func_doc, func_sig = ast.get_docstring(func_asn), ast.unparse(func_asn.args)</span>
+<span class="c1">#      try:</span>
+<span class="c1">#          func_desc, _ = func_doc.split(&quot;Args:&quot;)</span>
+<span class="c1">#      except (ValueError, AttributeError):</span>
+<span class="c1">#          raise RulePythonFileError(</span>
+<span class="c1">#              &quot;To upload rule, apply method must be well documented&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      func_info[&quot;description&quot;] = &quot;&quot;.join(func_desc.splitlines())</span>
+<span class="c1">#      func_info[&quot;params&quot;] = []</span>
+<span class="c1">#      for arg_type, arg_dict in process_args_from_function_docstring(</span>
+<span class="c1">#          func_doc, func_sig</span>
+<span class="c1">#      ):</span>
+<span class="c1">#          # Take schema for this arg_type from rule_params_template</span>
+<span class="c1">#          try:</span>
+<span class="c1">#              arg_default_dict = deepcopy(RULE_PARAMS_DEFAULTS[arg_type])</span>
+<span class="c1">#          except KeyError:</span>
+<span class="c1">#              arg_default_dict = deepcopy(RULE_PARAMS_DEFAULTS[&quot;str&quot;])</span>
+<span class="c1">#              print(</span>
+<span class="c1">#                  f&quot;Cannot convert type {arg_type} to platform types. Using text.&quot;</span>
+<span class="c1">#              )</span>
+<span class="c1">#          arg_default_dict.update(arg_dict)</span>
+<span class="c1">#          func_info[&quot;params&quot;].append(arg_default_dict)</span>
+<span class="c1">#      return func_info</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function loads rule .py file into EWX API rule config</span>
+<span class="c1">#  def load_rule_py(rule_pyfilepath: Path, filename_prefix: str = &quot;&quot;) -&gt; dict:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Converts rule ``.py`` file into a rule configuration that can be posted to</span>
+<span class="c1">#      Energyworx API. Also renames ``.py`` file to standard rule name convention.</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          rule_pyfilepath (Path): Path to rule Python file.</span>
+<span class="c1">#</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#          dict[str, Any]: Dictionary being the schema defined by Energyworx API.</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      # Abstract Syntax Tree for reliable python code parsing</span>
+<span class="c1">#      rule_dict = deepcopy(RULE_API_DEFAULT_JSON)</span>
+<span class="c1">#      if not rule_pyfilepath.exists() or not rule_pyfilepath.suffix == &quot;.py&quot;:</span>
+<span class="c1">#          raise RulePythonFileError(</span>
+<span class="c1">#              f&quot;{rule_pyfilepath} is not a valid Python file&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      rule_dict[&quot;ruleType&quot;] = rule_pyfilepath.parent.name</span>
+<span class="c1">#      if rule_dict[&quot;ruleType&quot;] not in RULE_TYPES:</span>
+<span class="c1">#          print(f&quot;Unknown rule type: {rule_dict[&#39;ruleType&#39;]!r}. Define it later.&quot;)</span>
+<span class="c1">#          # raise RulePythonFileError(f&quot;Unknown rule type: {rule_dict[&#39;ruleType&#39;]!r}&quot;)</span>
+<span class="c1">#      # Module Abstract Syntax Tree</span>
+<span class="c1">#      module_filename: str = rule_pyfilepath.name</span>
+<span class="c1">#      module_root = ast.parse(</span>
+<span class="c1">#          rule_pyfilepath.open().read(), module_filename, type_comments=True</span>
+<span class="c1">#      )</span>
+<span class="c1">#      # Code blob is whole source code</span>
+<span class="c1">#      rule_dict[&quot;codeBlob&quot;] = rule_pyfilepath.read_text()</span>
+<span class="c1">#      # This way code lose format: rule_dict[&#39;codeBlob&#39;] = ast.unparse(module_root)</span>
+<span class="c1">#      # Rule class is the only class that inherits from AbstractRule</span>
+<span class="c1">#      rule_parents = (&quot;AbstractRule&quot;, &quot;TransformRule&quot;)</span>
+<span class="c1">#      class_node = next(</span>
+<span class="c1">#          (</span>
+<span class="c1">#              n</span>
+<span class="c1">#              for n in ast.iter_child_nodes(module_root)</span>
+<span class="c1">#              if isinstance(n, ast.ClassDef)</span>
+<span class="c1">#              and getattr(n, &quot;bases&quot;, [])</span>
+<span class="c1">#              and n.bases[0].id in rule_parents</span>
+<span class="c1">#          ),</span>
+<span class="c1">#          None,</span>
+<span class="c1">#      )</span>
+<span class="c1">#      if class_node is None:</span>
+<span class="c1">#          raise RulePythonFileError(</span>
+<span class="c1">#              f&quot;Cannot find a class that inherits from {&#39;,&#39;.join(rule_parents)}&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      # Only rule names are obtained from class node</span>
+<span class="c1">#      rule_dict[&quot;name&quot;] = convert_name_to_naming_convention(</span>
+<span class="c1">#          class_node.name, &quot;CamelCase&quot;, &quot;snake_case&quot;</span>
+<span class="c1">#      )</span>
+<span class="c1">#      rule_dict[&quot;displayName&quot;] = convert_name_to_naming_convention(</span>
+<span class="c1">#          rule_dict[&quot;name&quot;], &quot;snake_case&quot;, &quot;Standard Display Name&quot;</span>
+<span class="c1">#      )</span>
+<span class="c1">#      # Rename rule file if necessary</span>
+<span class="c1">#      rule_good_stem: str = rule_dict[&quot;displayName&quot;].replace(&quot; &quot;, &quot;_&quot;).lower()</span>
+<span class="c1">#      if not rule_good_stem.startswith(filename_prefix):</span>
+<span class="c1">#          rule_good_stem = filename_prefix + rule_good_stem</span>
+<span class="c1">#      if not rule_good_stem.endswith(rule_dict[&quot;ruleType&quot;]):</span>
+<span class="c1">#          rule_good_stem = rule_good_stem + &quot;_&quot; + rule_dict[&quot;ruleType&quot;]</span>
+<span class="c1">#      if rule_good_stem != rule_pyfilepath.stem:</span>
+<span class="c1">#          new_rule_pyfilepath = rule_pyfilepath.rename(</span>
+<span class="c1">#              rule_pyfilepath.with_stem(rule_stem)</span>
+<span class="c1">#          )</span>
+<span class="c1">#          print(f&quot;{rule_pyfilepath} renamed to: {new_rule_pyfilepath}&quot;)</span>
+<span class="c1">#      # Process rule parameters</span>
+<span class="c1">#      apply_node = next(</span>
+<span class="c1">#          (</span>
+<span class="c1">#              n</span>
+<span class="c1">#              for n in ast.iter_child_nodes(class_node)</span>
+<span class="c1">#              if isinstance(n, ast.FunctionDef) and n.name == &quot;apply&quot;</span>
+<span class="c1">#          ),</span>
+<span class="c1">#          None,</span>
+<span class="c1">#      )</span>
+<span class="c1">#      if apply_node is None:</span>
+<span class="c1">#          raise RulePythonFileError(</span>
+<span class="c1">#              &quot;Your rule does not contain an apply method&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      rule_dict.update(process_apply_function_abstract_node(apply_node))</span>
+<span class="c1">#      return rule_dict</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  # This function dumps EWX API rule config into .py file.</span>
+<span class="c1">#  def dump_rule_py(</span>
+<span class="c1">#      rule_config: dict[str, Any],</span>
+<span class="c1">#      dirpath_raw: Optional[PathLike] = None,</span>
+<span class="c1">#      *,</span>
+<span class="c1">#      ruletype_in_name: bool = False,</span>
+<span class="c1">#      filename_prefix: str = &quot;&quot;,</span>
+<span class="c1">#  ) -&gt; JsonConfig:</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      Converts rule configuration into a rule ``.py`` giving it a name acording</span>
+<span class="c1">#      to standard rule name convention.</span>
+<span class="c1">#</span>
+<span class="c1">#      Args:</span>
+<span class="c1">#          rule_config: Rule configuration as it comes from Energyworx API.</span>
+<span class="c1">#          dirpath_raw: Optional directory path to host rule python file. If not</span>
+<span class="c1">#              given python file is not written.</span>
+<span class="c1">#          ruletype_in_name: Flag indicating if the rule type must be incorporated</span>
+<span class="c1">#              to rule name, class name and python filename as a suffix.</span>
+<span class="c1">#          filename_prefix: Prefix to incorporate to rule python filename.</span>
+<span class="c1">#</span>
+<span class="c1">#      Returns:</span>
+<span class="c1">#          Rule configuration (with correct naming) that can be uploaded to</span>
+<span class="c1">#          Energyworx API</span>
+<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      if isinstance(rule_config, list):</span>
+<span class="c1">#          raise ResourceJsonError(</span>
+<span class="c1">#              f&quot;Configuration schema is not a valid rule&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      # Module Abstract Syntax Tree</span>
+<span class="c1">#      module_root = ast.parse(</span>
+<span class="c1">#          rule_config[&quot;codeBlob&quot;], &quot;rule_config&quot;, type_comments=True</span>
+<span class="c1">#      )</span>
+<span class="c1">#      # Rule class is the only class that inherits from AbstractRule OR TransformRule</span>
+<span class="c1">#      rule_parents = (&quot;AbstractRule&quot;, &quot;TransformRule&quot;)</span>
+<span class="c1">#      class_node = next(</span>
+<span class="c1">#          (</span>
+<span class="c1">#              n</span>
+<span class="c1">#              for n in ast.iter_child_nodes(module_root)</span>
+<span class="c1">#              if isinstance(n, ast.ClassDef)</span>
+<span class="c1">#              and getattr(n, &quot;bases&quot;, [])</span>
+<span class="c1">#              and n.bases[0].id in rule_parents</span>
+<span class="c1">#          ),</span>
+<span class="c1">#          None,</span>
+<span class="c1">#      )</span>
+<span class="c1">#      if class_node is None:</span>
+<span class="c1">#          raise RulePythonFileError(</span>
+<span class="c1">#              f&quot;Cannot find a class that inherits from: {&#39;, &#39;.join(rule_parents)}&quot;</span>
+<span class="c1">#          )</span>
+<span class="c1">#      # Fix rule name</span>
+<span class="c1">#      if ruletype_in_name and not class_node.name.lower().endswith(</span>
+<span class="c1">#          rule_config[&quot;ruleType&quot;].lower()</span>
+<span class="c1">#      ):</span>
+<span class="c1">#          class_node.name += rule_config[&quot;ruleType&quot;].capitalize()</span>
+<span class="c1">#          rule_config[&quot;codeBlob&quot;] = ast.unparse(module_root)</span>
+<span class="c1">#      rule_config[&quot;name&quot;] = convert_name_to_naming_convention(</span>
+<span class="c1">#          class_node.name, &quot;CamelCase&quot;, &quot;snake_case&quot;</span>
+<span class="c1">#      )</span>
+<span class="c1">#      rule_config[&quot;displayName&quot;] = convert_name_to_naming_convention(</span>
+<span class="c1">#          class_node.name, &quot;CamelCase&quot;, &quot;Standard Display Name&quot;</span>
+<span class="c1">#      )</span>
+<span class="c1">#      rule_pyfilename = f&quot;{filename_prefix}_{rule_config[&#39;name&#39;]}.py&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#      # Write python file</span>
+<span class="c1">#      if dirpath_raw is not None:</span>
+<span class="c1">#          dirpath: Path = Path(dirpath_raw)</span>
+<span class="c1">#          if not dirpath.is_dir():</span>
+<span class="c1">#              raise RulePythonFileError(f&quot;{dirpath} is not a directory.&quot;)</span>
+<span class="c1">#          if dirpath.name != rule_config[&quot;ruleType&quot;]:</span>
+<span class="c1">#              dirpath = dirpath / rule_config[&quot;ruleType&quot;]</span>
+<span class="c1">#          rule_pyfilepath: Path = dirpath / rule_pyfilename</span>
+<span class="c1">#          rule_pyfilepath.parent.mkdir(exist_ok=True, parents=True)</span>
+<span class="c1">#          with rule_pyfilepath.open(&quot;w&quot;, encoding=&quot;latin-1&quot;) as _file:</span>
+<span class="c1">#              _file.write(rule_config[&quot;codeBlob&quot;])</span>
+<span class="c1">#      return rule_config</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  if __name__ == &quot;__main__&quot;:</span>
+<span class="c1">#      import doctest</span>
+<span class="c1">#</span>
+<span class="c1">#      doctest.testmod()</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+
+        <div class="related-pages">
+
+
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Santiago B. Pérez Pita
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+
+          </div>
+          <div class="right-details">
+
+          </div>
+        </div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+
+
+
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

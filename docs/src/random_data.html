@@ -1,0 +1,363 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="jsontools module" href="jsontools.html" />
+
+    <link rel="shortcut icon" href="../_static/jsontools-icon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>random_data module</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=da8a7cb0" />
+
+
+
+
+<style>
+  body {
+    --color-code-background: #f0f0f0;
+  --color-code-foreground: black;
+
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+
+      }
+    }
+  }
+</style></head>
+  <body>
+
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">JSONtools</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/jsontools-logo-optimized.svg" alt="Logo"/>
+  </div>
+
+  <span class="sidebar-brand-text">JSONtools</span>
+
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">src</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jsontools.html">jsontools module</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">random_data module</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-random_data">
+<span id="random-data-module"></span><h1>random_data module<a class="headerlink" href="#module-random_data" title="Link to this heading">#</a></h1>
+<p>Tools to create random Python builtin objects.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="random_data.COMPLEX_TYPES">
+<span class="sig-name descname"><span class="pre">COMPLEX_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'list'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'dict'&gt;)</span></em><a class="headerlink" href="#random_data.COMPLEX_TYPES" title="Link to this definition">#</a></dt>
+<dd><p>Types that are collections (string excluded)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="random_data.DATETIME_MINIMUM">
+<span class="sig-name descname"><span class="pre">DATETIME_MINIMUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(1970,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#random_data.DATETIME_MINIMUM" title="Link to this definition">#</a></dt>
+<dd><p>The minimum value for a valid date</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="random_data.RANDOM_FUNC_BY_TYPE">
+<span class="sig-name descname"><span class="pre">RANDOM_FUNC_BY_TYPE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{&lt;class</span> <span class="pre">'NoneType'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'datetime.datetime'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'dict'&gt;:</span> <span class="pre">&lt;class</span> <span class="pre">'random_data.RandomDict'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'float'&gt;:</span> <span class="pre">&lt;built-in</span> <span class="pre">method</span> <span class="pre">random</span> <span class="pre">of</span> <span class="pre">Random</span> <span class="pre">object&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'list'&gt;:</span> <span class="pre">&lt;class</span> <span class="pre">'random_data.RandomList'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;:</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;}</span></em><a class="headerlink" href="#random_data.RANDOM_FUNC_BY_TYPE" title="Link to this definition">#</a></dt>
+<dd><p>Mapping between each builtin Python type and its random generator</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="random_data.RandomDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RandomDict</span></span><a class="reference internal" href="../_modules/random_data.html#RandomDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#random_data.RandomDict" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Dict that contains random items, but all keys are <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="random_data.RandomList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RandomList</span></span><a class="reference internal" href="../_modules/random_data.html#RandomList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#random_data.RandomList" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
+<p>List that contains random items, all of the same type.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="random_data.SIMPLE_TYPES">
+<span class="sig-name descname"><span class="pre">SIMPLE_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'float'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'datetime.datetime'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'NoneType'&gt;)</span></em><a class="headerlink" href="#random_data.SIMPLE_TYPES" title="Link to this definition">#</a></dt>
+<dd><p>Default types that are not collections (string included)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="random_data.VALID_TIMEZONES">
+<span class="sig-name descname"><span class="pre">VALID_TIMEZONES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Europe/Budapest',</span> <span class="pre">'America/Noronha',</span> <span class="pre">'America/Catamarca',</span> <span class="pre">'GMT+0',</span> <span class="pre">'America/Indiana/Indianapolis',</span> <span class="pre">'Cuba',</span> <span class="pre">'Asia/Krasnoyarsk',</span> <span class="pre">'America/Ciudad_Juarez',</span> <span class="pre">'Asia/Kamchatka',</span> <span class="pre">'Etc/GMT-9',</span> <span class="pre">'Australia/Canberra',</span> <span class="pre">'Europe/Isle_of_Man',</span> <span class="pre">'US/Arizona',</span> <span class="pre">'America/Kentucky/Louisville',</span> <span class="pre">'Asia/Yakutsk',</span> <span class="pre">'Australia/Sydney',</span> <span class="pre">'Antarctica/DumontDUrville',</span> <span class="pre">'America/St_Thomas',</span> <span class="pre">'America/Jujuy',</span> <span class="pre">'Atlantic/Madeira',</span> <span class="pre">'America/Santa_Isabel',</span> <span class="pre">'Iran',</span> <span class="pre">'America/Santiago',</span> <span class="pre">'Antarctica/Vostok',</span> <span class="pre">'America/Fort_Nelson',</span> <span class="pre">'Europe/London',</span> <span class="pre">'America/Scoresbysund',</span> <span class="pre">'Asia/Harbin',</span> <span class="pre">'Asia/Rangoon',</span> <span class="pre">'America/St_Kitts',</span> <span class="pre">'Etc/GMT+1',</span> <span class="pre">'Asia/Qatar',</span> <span class="pre">'Canada/Yukon',</span> <span class="pre">'Factory',</span> <span class="pre">'Asia/Kabul',</span> <span class="pre">'America/Lower_Princes',</span> <span class="pre">'Asia/Thimbu',</span> <span class="pre">'Australia/Lindeman',</span> <span class="pre">'Africa/Accra',</span> <span class="pre">'America/Guadeloupe',</span> <span class="pre">'Australia/Hobart',</span> <span class="pre">'Europe/Malta',</span> <span class="pre">'America/Yakutat',</span> <span class="pre">'MET',</span> <span class="pre">'Africa/Bangui',</span> <span class="pre">'America/St_Lucia',</span> <span class="pre">'America/Anchorage',</span> <span class="pre">'Pacific/Kiritimati',</span> <span class="pre">'UCT',</span> <span class="pre">'Turkey',</span> <span class="pre">'Africa/Djibouti',</span> <span class="pre">'Africa/Johannesburg',</span> <span class="pre">'Pacific/Norfolk',</span> <span class="pre">'America/Punta_Arenas',</span> <span class="pre">'Pacific/Guam',</span> <span class="pre">'Brazil/Acre',</span> <span class="pre">'America/Guayaquil',</span> <span class="pre">'Asia/Aqtau',</span> <span class="pre">'Asia/Bishkek',</span> <span class="pre">'Antarctica/Mawson',</span> <span class="pre">'America/Eirunepe',</span> <span class="pre">'Atlantic/Faeroe',</span> <span class="pre">'Asia/Samarkand',</span> <span class="pre">'Indian/Kerguelen',</span> <span class="pre">'Africa/Khartoum',</span> <span class="pre">'Asia/Tashkent',</span> <span class="pre">'Hongkong',</span> <span class="pre">'US/Alaska',</span> <span class="pre">'EST',</span> <span class="pre">'Asia/Novosibirsk',</span> <span class="pre">'America/La_Paz',</span> <span class="pre">'Asia/Kuwait',</span> <span class="pre">'Australia/Perth',</span> <span class="pre">'Asia/Istanbul',</span> <span class="pre">'Asia/Ujung_Pandang',</span> <span class="pre">'America/Menominee',</span> <span class="pre">'Antarctica/Macquarie',</span> <span class="pre">'Asia/Damascus',</span> <span class="pre">'Indian/Maldives',</span> <span class="pre">'America/Dawson',</span> <span class="pre">'America/Miquelon',</span> <span class="pre">'Chile/Continental',</span> <span class="pre">'America/Knox_IN',</span> <span class="pre">'America/Goose_Bay',</span> <span class="pre">'Asia/Atyrau',</span> <span class="pre">'Etc/GMT',</span> <span class="pre">'America/Iqaluit',</span> <span class="pre">'Asia/Anadyr',</span> <span class="pre">'Etc/GMT-5',</span> <span class="pre">'Asia/Vladivostok',</span> <span class="pre">'Pacific/Apia',</span> <span class="pre">'Navajo',</span> <span class="pre">'CST6CDT',</span> <span class="pre">'Asia/Chongqing',</span> <span class="pre">'America/Indianapolis',</span> <span class="pre">'Etc/GMT-13',</span> <span class="pre">'Asia/Hebron',</span> <span class="pre">'Etc/Zulu',</span> <span class="pre">'America/Indiana/Vincennes',</span> <span class="pre">'Africa/Mogadishu',</span> <span class="pre">'Pacific/Auckland',</span> <span class="pre">'Pacific/Pohnpei',</span> <span class="pre">'America/Vancouver',</span> <span class="pre">'Canada/Saskatchewan',</span> <span class="pre">'Europe/Zaporozhye',</span> <span class="pre">'Asia/Chungking',</span> <span class="pre">'MST7MDT',</span> <span class="pre">'America/Santarem',</span> <span class="pre">'Africa/Windhoek',</span> <span class="pre">'Africa/Bamako',</span> <span class="pre">'Africa/Conakry',</span> <span class="pre">'Pacific/Kosrae',</span> <span class="pre">'America/Adak',</span> <span class="pre">'Pacific/Galapagos',</span> <span class="pre">'Pacific/Tongatapu',</span> <span class="pre">'Asia/Phnom_Penh',</span> <span class="pre">'America/Jamaica',</span> <span class="pre">'Etc/GMT-8',</span> <span class="pre">'Canada/Atlantic',</span> <span class="pre">'Europe/Busingen',</span> <span class="pre">'Asia/Khandyga',</span> <span class="pre">'Europe/Monaco',</span> <span class="pre">'Asia/Hovd',</span> <span class="pre">'Atlantic/Cape_Verde',</span> <span class="pre">'Etc/GMT+4',</span> <span class="pre">'America/Sao_Paulo',</span> <span class="pre">'Asia/Ulaanbaatar',</span> <span class="pre">'Etc/GMT0',</span> <span class="pre">'US/Eastern',</span> <span class="pre">'Asia/Yerevan',</span> <span class="pre">'Asia/Choibalsan',</span> <span class="pre">'America/Indiana/Tell_City',</span> <span class="pre">'Pacific/Kwajalein',</span> <span class="pre">'Etc/GMT-6',</span> <span class="pre">'America/Cayenne',</span> <span class="pre">'Australia/North',</span> <span class="pre">'Atlantic/Reykjavik',</span> <span class="pre">'Pacific/Chatham',</span> <span class="pre">'Etc/GMT+6',</span> <span class="pre">'Asia/Muscat',</span> <span class="pre">'Asia/Srednekolymsk',</span> <span class="pre">'America/Belize',</span> <span class="pre">'Pacific/Tarawa',</span> <span class="pre">'Europe/Tallinn',</span> <span class="pre">'Libya',</span> <span class="pre">'Asia/Barnaul',</span> <span class="pre">'Europe/Saratov',</span> <span class="pre">'Europe/Belgrade',</span> <span class="pre">'Australia/Eucla',</span> <span class="pre">'America/Argentina/Cordoba',</span> <span class="pre">'Indian/Chagos',</span> <span class="pre">'Africa/Luanda',</span> <span class="pre">'America/Grenada',</span> <span class="pre">'Asia/Kashgar',</span> <span class="pre">'Asia/Saigon',</span> <span class="pre">'America/Mexico_City',</span> <span class="pre">'Asia/Dili',</span> <span class="pre">'Africa/Porto-Novo',</span> <span class="pre">'Europe/Simferopol',</span> <span class="pre">'Pacific/Guadalcanal',</span> <span class="pre">'Europe/San_Marino',</span> <span class="pre">'Africa/Douala',</span> <span class="pre">'America/Cordoba',</span> <span class="pre">'Asia/Baghdad',</span> <span class="pre">'Asia/Irkutsk',</span> <span class="pre">'America/Cancun',</span> <span class="pre">'America/Boa_Vista',</span> <span class="pre">'Europe/Jersey',</span> <span class="pre">'Asia/Tel_Aviv',</span> <span class="pre">'Etc/GMT+12',</span> <span class="pre">'America/Indiana/Winamac',</span> <span class="pre">'Atlantic/Canary',</span> <span class="pre">'America/Montserrat',</span> <span class="pre">'PRC',</span> <span class="pre">'America/Juneau',</span> <span class="pre">'Asia/Dubai',</span> <span class="pre">'Asia/Dacca',</span> <span class="pre">'Africa/Nairobi',</span> <span class="pre">'Europe/Madrid',</span> <span class="pre">'Jamaica',</span> <span class="pre">'America/Mendoza',</span> <span class="pre">'Asia/Jayapura',</span> <span class="pre">'Asia/Singapore',</span> <span class="pre">'EET',</span> <span class="pre">'WET',</span> <span class="pre">'Africa/Lusaka',</span> <span class="pre">'Asia/Sakhalin',</span> <span class="pre">'America/Barbados',</span> <span class="pre">'America/Glace_Bay',</span> <span class="pre">'America/Godthab',</span> <span class="pre">'Australia/Currie',</span> <span class="pre">'Europe/Belfast',</span> <span class="pre">'Etc/GMT+8',</span> <span class="pre">'Asia/Macau',</span> <span class="pre">'Africa/Juba',</span> <span class="pre">'Europe/Uzhgorod',</span> <span class="pre">'Asia/Kolkata',</span> <span class="pre">'Pacific/Kanton',</span> <span class="pre">'Brazil/DeNoronha',</span> <span class="pre">'Atlantic/Stanley',</span> <span class="pre">'America/Rio_Branco',</span> <span class="pre">'Africa/Brazzaville',</span> <span class="pre">'America/North_Dakota/New_Salem',</span> <span class="pre">'Brazil/East',</span> <span class="pre">'America/Santo_Domingo',</span> <span class="pre">'America/Recife',</span> <span class="pre">'Australia/ACT',</span> <span class="pre">'Etc/GMT+7',</span> <span class="pre">'Asia/Qyzylorda',</span> <span class="pre">'America/Danmarkshavn',</span> <span class="pre">'Antarctica/Troll',</span> <span class="pre">'America/Phoenix',</span> <span class="pre">'UTC',</span> <span class="pre">'Canada/Pacific',</span> <span class="pre">'Australia/Brisbane',</span> <span class="pre">'Australia/Yancowinna',</span> <span class="pre">'Etc/GMT-10',</span> <span class="pre">'America/Atka',</span> <span class="pre">'Australia/Darwin',</span> <span class="pre">'Pacific/Midway',</span> <span class="pre">'Pacific/Pago_Pago',</span> <span class="pre">'Mexico/BajaNorte',</span> <span class="pre">'America/Rankin_Inlet',</span> <span class="pre">'CET',</span> <span class="pre">'Asia/Katmandu',</span> <span class="pre">'Asia/Karachi',</span> <span class="pre">'America/Hermosillo',</span> <span class="pre">'Singapore',</span> <span class="pre">'PST8PDT',</span> <span class="pre">'US/Central',</span> <span class="pre">'Europe/Mariehamn',</span> <span class="pre">'Europe/Prague',</span> <span class="pre">'America/Guyana',</span> <span class="pre">'Antarctica/Palmer',</span> <span class="pre">'Etc/GMT-11',</span> <span class="pre">'America/Ojinaga',</span> <span class="pre">'Indian/Reunion',</span> <span class="pre">'Mexico/General',</span> <span class="pre">'Africa/Banjul',</span> <span class="pre">'Atlantic/Azores',</span> <span class="pre">'America/Cayman',</span> <span class="pre">'Europe/Andorra',</span> <span class="pre">'America/Antigua',</span> <span class="pre">'Africa/Sao_Tome',</span> <span class="pre">'Asia/Thimphu',</span> <span class="pre">'Pacific/Funafuti',</span> <span class="pre">'America/St_Vincent',</span> <span class="pre">'Asia/Qostanay',</span> <span class="pre">'Europe/Berlin',</span> <span class="pre">'Africa/Blantyre',</span> <span class="pre">'Europe/Astrakhan',</span> <span class="pre">'America/Atikokan',</span> <span class="pre">'Asia/Aqtobe',</span> <span class="pre">'Africa/Cairo',</span> <span class="pre">'Pacific/Gambier',</span> <span class="pre">'America/Bahia',</span> <span class="pre">'Asia/Riyadh',</span> <span class="pre">'Europe/Skopje',</span> <span class="pre">'Africa/Asmera',</span> <span class="pre">'Africa/Ndjamena',</span> <span class="pre">'Australia/West',</span> <span class="pre">'Europe/Vatican',</span> <span class="pre">'America/Argentina/Tucuman',</span> <span class="pre">'America/Yellowknife',</span> <span class="pre">'Asia/Manila',</span> <span class="pre">'US/Aleutian',</span> <span class="pre">'America/St_Johns',</span> <span class="pre">'America/Lima',</span> <span class="pre">'America/Blanc-Sablon',</span> <span class="pre">'Etc/GMT-3',</span> <span class="pre">'Antarctica/Casey',</span> <span class="pre">'America/Indiana/Marengo',</span> <span class="pre">'Europe/Athens',</span> <span class="pre">'Pacific/Port_Moresby',</span> <span class="pre">'Asia/Yangon',</span> <span class="pre">'America/Chicago',</span> <span class="pre">'Europe/Nicosia',</span> <span class="pre">'America/Kralendijk',</span> <span class="pre">'Asia/Tehran',</span> <span class="pre">'Europe/Vaduz',</span> <span class="pre">'Asia/Brunei',</span> <span class="pre">'Africa/Asmara',</span> <span class="pre">'Asia/Tokyo',</span> <span class="pre">'Etc/GMT-2',</span> <span class="pre">'Asia/Taipei',</span> <span class="pre">'Pacific/Marquesas',</span> <span class="pre">'Pacific/Rarotonga',</span> <span class="pre">'America/Campo_Grande',</span> <span class="pre">'Asia/Ho_Chi_Minh',</span> <span class="pre">'Europe/Guernsey',</span> <span class="pre">'Africa/Dar_es_Salaam',</span> <span class="pre">'America/Los_Angeles',</span> <span class="pre">'Europe/Kyiv',</span> <span class="pre">'Africa/Kinshasa',</span> <span class="pre">'Etc/GMT+2',</span> <span class="pre">'Pacific/Johnston',</span> <span class="pre">'America/St_Barthelemy',</span> <span class="pre">'Australia/Queensland',</span> <span class="pre">'Australia/Tasmania',</span> <span class="pre">'Asia/Jerusalem',</span> <span class="pre">'Etc/UTC',</span> <span class="pre">'America/Curacao',</span> <span class="pre">'America/Managua',</span> <span class="pre">'Antarctica/Davis',</span> <span class="pre">'America/Ensenada',</span> <span class="pre">'Etc/GMT+5',</span> <span class="pre">'America/Nome',</span> <span class="pre">'Australia/Adelaide',</span> <span class="pre">'America/Argentina/Rio_Gallegos',</span> <span class="pre">'America/Bogota',</span> <span class="pre">'America/Louisville',</span> <span class="pre">'America/Maceio',</span> <span class="pre">'Pacific/Bougainville',</span> <span class="pre">'America/Dawson_Creek',</span> <span class="pre">'Europe/Ulyanovsk',</span> <span class="pre">'America/Grand_Turk',</span> <span class="pre">'Europe/Amsterdam',</span> <span class="pre">'Antarctica/Rothera',</span> <span class="pre">'America/Porto_Acre',</span> <span class="pre">'Etc/GMT-7',</span> <span class="pre">'Africa/Niamey',</span> <span class="pre">'America/Argentina/San_Luis',</span> <span class="pre">'America/Manaus',</span> <span class="pre">'Europe/Tirane',</span> <span class="pre">'Africa/Nouakchott',</span> <span class="pre">'Europe/Brussels',</span> <span class="pre">'Africa/Tunis',</span> <span class="pre">'US/Samoa',</span> <span class="pre">'America/Moncton',</span> <span class="pre">'Portugal',</span> <span class="pre">'America/Inuvik',</span> <span class="pre">'America/Argentina/Buenos_Aires',</span> <span class="pre">'Pacific/Pitcairn',</span> <span class="pre">'America/Asuncion',</span> <span class="pre">'America/Whitehorse',</span> <span class="pre">'Indian/Mauritius',</span> <span class="pre">'Etc/GMT-0',</span> <span class="pre">'Australia/Lord_Howe',</span> <span class="pre">'Pacific/Enderbury',</span> <span class="pre">'Africa/Abidjan',</span> <span class="pre">'Africa/El_Aaiun',</span> <span class="pre">'America/Marigot',</span> <span class="pre">'America/Coral_Harbour',</span> <span class="pre">'Pacific/Wallis',</span> <span class="pre">'America/Port_of_Spain',</span> <span class="pre">'Africa/Bujumbura',</span> <span class="pre">'Pacific/Ponape',</span> <span class="pre">'Zulu',</span> <span class="pre">'Asia/Kuching',</span> <span class="pre">'Etc/Greenwich',</span> <span class="pre">'Etc/GMT+9',</span> <span class="pre">'America/Argentina/San_Juan',</span> <span class="pre">'Asia/Tbilisi',</span> <span class="pre">'Pacific/Chuuk',</span> <span class="pre">'ROK',</span> <span class="pre">'Asia/Kuala_Lumpur',</span> <span class="pre">'Universal',</span> <span class="pre">'Europe/Kaliningrad',</span> <span class="pre">'GMT',</span> <span class="pre">'Europe/Moscow',</span> <span class="pre">'Japan',</span> <span class="pre">'Europe/Stockholm',</span> <span class="pre">'Asia/Bangkok',</span> <span class="pre">'Africa/Harare',</span> <span class="pre">'America/North_Dakota/Beulah',</span> <span class="pre">'US/Michigan',</span> <span class="pre">'Asia/Urumqi',</span> <span class="pre">'GB',</span> <span class="pre">'Europe/Sarajevo',</span> <span class="pre">'Europe/Luxembourg',</span> <span class="pre">'Africa/Kigali',</span> <span class="pre">'America/Havana',</span> <span class="pre">'Europe/Helsinki',</span> <span class="pre">'America/Porto_Velho',</span> <span class="pre">'Europe/Sofia',</span> <span class="pre">'Pacific/Wake',</span> <span class="pre">'Indian/Comoro',</span> <span class="pre">'Asia/Shanghai',</span> <span class="pre">'Pacific/Niue',</span> <span class="pre">'America/Winnipeg',</span> <span class="pre">'America/Argentina/La_Rioja',</span> <span class="pre">'Greenwich',</span> <span class="pre">'MST',</span> <span class="pre">'America/Toronto',</span> <span class="pre">'America/Halifax',</span> <span class="pre">'Europe/Bratislava',</span> <span class="pre">'US/Indiana-Starke',</span> <span class="pre">'America/Martinique',</span> <span class="pre">'Asia/Ust-Nera',</span> <span class="pre">'Europe/Chisinau',</span> <span class="pre">'Africa/Malabo',</span> <span class="pre">'Atlantic/St_Helena',</span> <span class="pre">'Africa/Casablanca',</span> <span class="pre">'Etc/GMT+11',</span> <span class="pre">'Africa/Addis_Ababa',</span> <span class="pre">'Europe/Gibraltar',</span> <span class="pre">'America/Aruba',</span> <span class="pre">'America/Edmonton',</span> <span class="pre">'America/Kentucky/Monticello',</span> <span class="pre">'Asia/Novokuznetsk',</span> <span class="pre">'EST5EDT',</span> <span class="pre">'GMT0',</span> <span class="pre">'Asia/Nicosia',</span> <span class="pre">'Africa/Libreville',</span> <span class="pre">'localtime',</span> <span class="pre">'Australia/Broken_Hill',</span> <span class="pre">'Africa/Maseru',</span> <span class="pre">'Etc/GMT-14',</span> <span class="pre">'Pacific/Saipan',</span> <span class="pre">'Europe/Volgograd',</span> <span class="pre">'Europe/Minsk',</span> <span class="pre">'Brazil/West',</span> <span class="pre">'Antarctica/South_Pole',</span> <span class="pre">'Asia/Aden',</span> <span class="pre">'Australia/NSW',</span> <span class="pre">'America/Denver',</span> <span class="pre">'Europe/Istanbul',</span> <span class="pre">'America/Argentina/Mendoza',</span> <span class="pre">'America/New_York',</span> <span class="pre">'Africa/Kampala',</span> <span class="pre">'Indian/Antananarivo',</span> <span class="pre">'America/Tortola',</span> <span class="pre">'Etc/GMT+0',</span> <span class="pre">'America/Indiana/Knox',</span> <span class="pre">'America/Caracas',</span> <span class="pre">'Europe/Rome',</span> <span class="pre">'America/Indiana/Vevay',</span> <span class="pre">'Europe/Bucharest',</span> <span class="pre">'Australia/South',</span> <span class="pre">'Africa/Dakar',</span> <span class="pre">'Africa/Mbabane',</span> <span class="pre">'Africa/Timbuktu',</span> <span class="pre">'Pacific/Efate',</span> <span class="pre">'Europe/Riga',</span> <span class="pre">'Asia/Ashkhabad',</span> <span class="pre">'Europe/Kiev',</span> <span class="pre">'Atlantic/South_Georgia',</span> <span class="pre">'America/Port-au-Prince',</span> <span class="pre">'America/Buenos_Aires',</span> <span class="pre">'America/Indiana/Petersburg',</span> <span class="pre">'Africa/Monrovia',</span> <span class="pre">'Europe/Warsaw',</span> <span class="pre">'Egypt',</span> <span class="pre">'Asia/Dhaka',</span> <span class="pre">'Asia/Tomsk',</span> <span class="pre">'Iceland',</span> <span class="pre">'America/Monterrey',</span> <span class="pre">'America/Guatemala',</span> <span class="pre">'Asia/Gaza',</span> <span class="pre">'America/Montreal',</span> <span class="pre">'Asia/Seoul',</span> <span class="pre">'America/Virgin',</span> <span class="pre">'America/Argentina/Catamarca',</span> <span class="pre">'Europe/Oslo',</span> <span class="pre">'Pacific/Truk',</span> <span class="pre">'America/Nipigon',</span> <span class="pre">'America/Argentina/ComodRivadavia',</span> <span class="pre">'Canada/Eastern',</span> <span class="pre">'Europe/Kirov',</span> <span class="pre">'Canada/Mountain',</span> <span class="pre">'Africa/Lubumbashi',</span> <span class="pre">'Europe/Dublin',</span> <span class="pre">'America/Pangnirtung',</span> <span class="pre">'Australia/Melbourne',</span> <span class="pre">'Pacific/Fakaofo',</span> <span class="pre">'Asia/Magadan',</span> <span class="pre">'America/Swift_Current',</span> <span class="pre">'Canada/Central',</span> <span class="pre">'America/Cuiaba',</span> <span class="pre">'Antarctica/McMurdo',</span> <span class="pre">'Africa/Maputo',</span> <span class="pre">'Pacific/Honolulu',</span> <span class="pre">'America/Fort_Wayne',</span> <span class="pre">'America/Sitka',</span> <span class="pre">'America/Chihuahua',</span> <span class="pre">'Asia/Beirut',</span> <span class="pre">'America/Belem',</span> <span class="pre">'America/Rosario',</span> <span class="pre">'Pacific/Palau',</span> <span class="pre">'GB-Eire',</span> <span class="pre">'America/Araguaina',</span> <span class="pre">'Asia/Jakarta',</span> <span class="pre">'Asia/Hong_Kong',</span> <span class="pre">'America/Metlakatla',</span> <span class="pre">'Etc/GMT-12',</span> <span class="pre">'Pacific/Tahiti',</span> <span class="pre">'US/Mountain',</span> <span class="pre">'Arctic/Longyearbyen',</span> <span class="pre">'America/Costa_Rica',</span> <span class="pre">'Etc/GMT+10',</span> <span class="pre">'America/Boise',</span> <span class="pre">'NZ-CHAT',</span> <span class="pre">'Africa/Lome',</span> <span class="pre">'Africa/Algiers',</span> <span class="pre">'Asia/Omsk',</span> <span class="pre">'America/Thule',</span> <span class="pre">'ROC',</span> <span class="pre">'Africa/Lagos',</span> <span class="pre">'America/Detroit',</span> <span class="pre">'America/Regina',</span> <span class="pre">'Pacific/Majuro',</span> <span class="pre">'America/Dominica',</span> <span class="pre">'Poland',</span> <span class="pre">'Atlantic/Faroe',</span> <span class="pre">'America/Cambridge_Bay',</span> <span class="pre">'Asia/Almaty',</span> <span class="pre">'Europe/Vilnius',</span> <span class="pre">'Europe/Tiraspol',</span> <span class="pre">'Etc/Universal',</span> <span class="pre">'Europe/Ljubljana',</span> <span class="pre">'Asia/Kathmandu',</span> <span class="pre">'Israel',</span> <span class="pre">'Europe/Lisbon',</span> <span class="pre">'Etc/GMT-1',</span> <span class="pre">'Indian/Mayotte',</span> <span class="pre">'Asia/Amman',</span> <span class="pre">'America/Paramaribo',</span> <span class="pre">'Kwajalein',</span> <span class="pre">'America/Tegucigalpa',</span> <span class="pre">'Indian/Mahe',</span> <span class="pre">'Europe/Samara',</span> <span class="pre">'Asia/Chita',</span> <span class="pre">'America/Nuuk',</span> <span class="pre">'Pacific/Yap',</span> <span class="pre">'America/Montevideo',</span> <span class="pre">'America/Fortaleza',</span> <span class="pre">'Europe/Podgorica',</span> <span class="pre">'Chile/EasterIsland',</span> <span class="pre">'Africa/Ouagadougou',</span> <span class="pre">'Europe/Zurich',</span> <span class="pre">'Australia/LHI',</span> <span class="pre">'Asia/Macao',</span> <span class="pre">'Asia/Famagusta',</span> <span class="pre">'Europe/Copenhagen',</span> <span class="pre">'Etc/UCT',</span> <span class="pre">'Pacific/Easter',</span> <span class="pre">'GMT-0',</span> <span class="pre">'Pacific/Samoa',</span> <span class="pre">'Africa/Bissau',</span> <span class="pre">'Asia/Oral',</span> <span class="pre">'America/Creston',</span> <span class="pre">'America/Resolute',</span> <span class="pre">'Canada/Newfoundland',</span> <span class="pre">'Australia/Victoria',</span> <span class="pre">'Africa/Ceuta',</span> <span class="pre">'W-SU',</span> <span class="pre">'Asia/Ulan_Bator',</span> <span class="pre">'US/Hawaii',</span> <span class="pre">'America/Merida',</span> <span class="pre">'US/East-Indiana',</span> <span class="pre">'America/Mazatlan',</span> <span class="pre">'America/Panama',</span> <span class="pre">'NZ',</span> <span class="pre">'Asia/Makassar',</span> <span class="pre">'Mexico/BajaSur',</span> <span class="pre">'Atlantic/Jan_Mayen',</span> <span class="pre">'Pacific/Fiji',</span> <span class="pre">'Asia/Yekaterinburg',</span> <span class="pre">'Etc/GMT-4',</span> <span class="pre">'Asia/Colombo',</span> <span class="pre">'Atlantic/Bermuda',</span> <span class="pre">'Asia/Pontianak',</span> <span class="pre">'Asia/Dushanbe',</span> <span class="pre">'America/Argentina/Salta',</span> <span class="pre">'Asia/Ashgabat',</span> <span class="pre">'America/Shiprock',</span> <span class="pre">'Europe/Zagreb',</span> <span class="pre">'America/Tijuana',</span> <span class="pre">'Indian/Christmas',</span> <span class="pre">'Africa/Gaborone',</span> <span class="pre">'Asia/Vientiane',</span> <span class="pre">'Asia/Bahrain',</span> <span class="pre">'Etc/GMT+3',</span> <span class="pre">'Europe/Paris',</span> <span class="pre">'US/Pacific',</span> <span class="pre">'America/Rainy_River',</span> <span class="pre">'America/Nassau',</span> <span class="pre">'America/Argentina/Ushuaia',</span> <span class="pre">'Asia/Baku',</span> <span class="pre">'Pacific/Nauru',</span> <span class="pre">'Europe/Vienna',</span> <span class="pre">'Pacific/Noumea',</span> <span class="pre">'America/Thunder_Bay',</span> <span class="pre">'Indian/Cocos',</span> <span class="pre">'America/Bahia_Banderas',</span> <span class="pre">'America/Argentina/Jujuy',</span> <span class="pre">'America/Matamoros',</span> <span class="pre">'America/Anguilla',</span> <span class="pre">'America/El_Salvador',</span> <span class="pre">'America/North_Dakota/Center',</span> <span class="pre">'Africa/Tripoli',</span> <span class="pre">'Asia/Pyongyang',</span> <span class="pre">'Asia/Calcutta',</span> <span class="pre">'HST',</span> <span class="pre">'America/Puerto_Rico',</span> <span class="pre">'Eire',</span> <span class="pre">'Antarctica/Syowa',</span> <span class="pre">'Africa/Freetown']</span></em><a class="headerlink" href="#random_data.VALID_TIMEZONES" title="Link to this definition">#</a></dt>
+<dd><p>List of timezone names</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random">
+<span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">interval</span> <span class="pre">[0,</span> <span class="pre">1).</span></span></span><a class="headerlink" href="#random_data.random" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random_datetime">
+<span class="sig-name descname"><span class="pre">random_datetime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#random_data.random_datetime" title="Link to this definition">#</a></dt>
+<dd><p>Returns a random datetime after <a class="reference internal" href="#random_data.DATETIME_MINIMUM" title="random_data.DATETIME_MINIMUM"><code class="xref py py-class docutils literal notranslate"><span class="pre">DATETIME_MINIMUM</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random_float">
+<span class="sig-name descname"><span class="pre">random_float</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#random_data.random_float" title="Link to this definition">#</a></dt>
+<dd><p>Returns a random float between 0 and 1</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random_integer">
+<span class="sig-name descname"><span class="pre">random_integer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#random_data.random_integer" title="Link to this definition">#</a></dt>
+<dd><p>Returns a random integer between 1 and 100</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random_string">
+<span class="sig-name descname"><span class="pre">random_string</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#random_data.random_string" title="Link to this definition">#</a></dt>
+<dd><p>Returns a random string of ascii letters, ‘_’ and ‘-’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="random_data.random_timezone">
+<span class="sig-name descname"><span class="pre">random_timezone</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#random_data.random_timezone" title="Link to this definition">#</a></dt>
+<dd><p>Returns a random <code class="xref py py-class docutils literal notranslate"><span class="pre">zoneinfo.ZoneInfo</span></code></p>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+
+        <div class="related-pages">
+
+          <a class="prev-page" href="jsontools.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+
+                <div class="title">jsontools module</div>
+
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Santiago B. Pérez Pita
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+
+          </div>
+          <div class="right-details">
+
+          </div>
+        </div>
+
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+
+
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">random_data module</a><ul>
+<li><a class="reference internal" href="#random_data.COMPLEX_TYPES"><code class="docutils literal notranslate"><span class="pre">COMPLEX_TYPES</span></code></a></li>
+<li><a class="reference internal" href="#random_data.DATETIME_MINIMUM"><code class="docutils literal notranslate"><span class="pre">DATETIME_MINIMUM</span></code></a></li>
+<li><a class="reference internal" href="#random_data.RANDOM_FUNC_BY_TYPE"><code class="docutils literal notranslate"><span class="pre">RANDOM_FUNC_BY_TYPE</span></code></a></li>
+<li><a class="reference internal" href="#random_data.RandomDict"><code class="docutils literal notranslate"><span class="pre">RandomDict</span></code></a></li>
+<li><a class="reference internal" href="#random_data.RandomList"><code class="docutils literal notranslate"><span class="pre">RandomList</span></code></a></li>
+<li><a class="reference internal" href="#random_data.SIMPLE_TYPES"><code class="docutils literal notranslate"><span class="pre">SIMPLE_TYPES</span></code></a></li>
+<li><a class="reference internal" href="#random_data.VALID_TIMEZONES"><code class="docutils literal notranslate"><span class="pre">VALID_TIMEZONES</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random_datetime"><code class="docutils literal notranslate"><span class="pre">random_datetime()</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random_float"><code class="docutils literal notranslate"><span class="pre">random_float()</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random_integer"><code class="docutils literal notranslate"><span class="pre">random_integer()</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random_string"><code class="docutils literal notranslate"><span class="pre">random_string()</span></code></a></li>
+<li><a class="reference internal" href="#random_data.random_timezone"><code class="docutils literal notranslate"><span class="pre">random_timezone()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+
+
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=38b66d78"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

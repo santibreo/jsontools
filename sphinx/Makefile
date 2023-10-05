@@ -7,6 +7,7 @@ SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
+PUBLISHDIR	  = $(shell dirname $(CURDIR))/docs
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -19,10 +20,12 @@ rst:
 		--output-dir "$(SOURCEDIR)/src" ../src
 
 check:
-	$(BROWSER) $(BUILDDIR)/html/index.html
+	$(BROWSER) $(PUBLISHDIR)/index.html
 
 publish:
-	mv $(BUILDDIR)/html $(BUILDDIR)/../../docs
+	rm -rf $(PUBLISHDIR) && \
+	mv $(BUILDDIR)/html $(PUBLISHDIR) && \
+	cp $(SOURCEDIR)/_static/img/jsontools-icon.ico $(PUBLISHDIR)/_static/
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

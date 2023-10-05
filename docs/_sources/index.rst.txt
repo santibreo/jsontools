@@ -5,6 +5,7 @@
 
 
 .. include:: ../../README.rst
+   :start-line: 4
 
 
 .. toctree::

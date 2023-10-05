@@ -83,7 +83,7 @@ html_theme = 'furo'
 html_title = ''  # This is added to the title, doesn't replace it (sh*t!)
 html_short_title = ''
 html_static_path = ['_static']
-html_logo = str(Path('_static') / 'img/jsontools-logo-optimized.svg')
+html_logo = str(Path('_static') / 'img/jsontools-logo.svg')
 html_favicon = str(Path('_static') / 'img/jsontools-icon.ico')
 html_theme_options = {
     'navigation_with_keys': True,

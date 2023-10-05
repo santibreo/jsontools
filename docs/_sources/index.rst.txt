@@ -8,16 +8,20 @@
    :start-line: 4
 
 
+*******
+Modules
+*******
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Modules:
+   :maxdepth: 1
 
-   ./src/modules.rst
+   ./src/jsontools.rst
+   ./src/random_data.rst
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. Indices and tables
+.. ==================
+..
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

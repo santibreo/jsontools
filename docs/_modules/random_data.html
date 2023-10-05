@@ -157,13 +157,9 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../src/modules.html">src</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of src</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../src/jsontools.html">jsontools module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../src/random_data.html">random_data module</a></li>
-</ul>
-</li>
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../src/jsontools.html">jsontools module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/random_data.html">random_data module</a></li>
 </ul>
 
 </div>
@@ -209,102 +205,139 @@
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choices</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span> <span class="k">as</span> <span class="n">randfloat</span>
 <span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_letters</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">NoneType</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
 
 
+<span class="n">MAX_LEVEL_DEPTH</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="s1">&#39;Maximum nesting level of complex types&#39;</span>
 <span class="n">VALID_TIMEZONES</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">zoneinfo</span><span class="o">.</span><span class="n">available_timezones</span><span class="p">())</span>
 <span class="s1">&#39;List of timezone names&#39;</span>
 <span class="n">DATETIME_MINIMUM</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
 <span class="s1">&#39;The minimum value for a valid date&#39;</span>
-<span class="n">random_float</span> <span class="o">=</span> <span class="n">random</span>
-<span class="s1">&#39;Returns a random float between 0 and 1&#39;</span>
-<span class="n">random_integer</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
-<span class="s1">&#39;Returns a random integer between 1 and 100&#39;</span>
-<span class="n">random_string</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">choices</span><span class="p">(</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="s1">&#39;_-&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">)))</span>
+<span class="n">randstr</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">choices</span><span class="p">(</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="s1">&#39;_-&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">)))</span>
 <span class="s2">&quot;Returns a random string of ascii letters, &#39;_&#39; and &#39;-&#39;&quot;</span>
-<span class="n">random_timezone</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">zoneinfo</span><span class="o">.</span><span class="n">ZoneInfo</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">VALID_TIMEZONES</span><span class="p">))</span>
+<span class="n">randtimezone</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">zoneinfo</span><span class="o">.</span><span class="n">ZoneInfo</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">VALID_TIMEZONES</span><span class="p">))</span>
 <span class="s1">&#39;Returns a random :class:`zoneinfo.ZoneInfo`&#39;</span>
-<span class="n">random_datetime</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
+<span class="n">randdatetime</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
     <span class="p">(</span>
         <span class="n">DATETIME_MINIMUM</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3600</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">random_timezone</span><span class="p">())</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">astimezone</span><span class="p">(</span><span class="n">randtimezone</span><span class="p">())</span>
 <span class="p">)</span>
 <span class="s1">&#39;Returns a random datetime after :class:`DATETIME_MINIMUM`&#39;</span>
 <span class="n">SIMPLE_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">)</span>
 <span class="s1">&#39;Default types that are not collections (string included)&#39;</span>
 <span class="n">COMPLEX_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
 <span class="s1">&#39;Types that are collections (string excluded)&#39;</span>
-<span class="n">RANDOM_FUNC_BY_TYPE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nb">str</span><span class="p">:</span> <span class="n">random_string</span><span class="p">,</span>
-    <span class="nb">int</span><span class="p">:</span> <span class="n">random_integer</span><span class="p">,</span>
-    <span class="nb">float</span><span class="p">:</span> <span class="n">random_float</span><span class="p">,</span>
-    <span class="n">datetime</span><span class="p">:</span> <span class="n">random_datetime</span><span class="p">,</span>
+<span class="n">_RANDOM_FUNC_BY_TYPE</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">str</span><span class="p">:</span> <span class="n">randstr</span><span class="p">,</span>
+    <span class="nb">int</span><span class="p">:</span> <span class="n">partial</span><span class="p">(</span><span class="n">randint</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+    <span class="nb">float</span><span class="p">:</span> <span class="n">randfloat</span><span class="p">,</span>
+    <span class="n">datetime</span><span class="p">:</span> <span class="n">randdatetime</span><span class="p">,</span>
     <span class="n">NoneType</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="s1">&#39;Mapping between each builtin Python type and its random generator&#39;</span>
 
 
-<div class="viewcode-block" id="RandomList">
-<a class="viewcode-back" href="../src/random_data.html#random_data.RandomList">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomList</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;List that contains random items, all of the same type.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="randtypes">
+<a class="viewcode-back" href="../src/random_data.html#random_data.randtypes">[docs]</a>
+<span class="k">def</span> <span class="nf">randtypes</span><span class="p">(</span><span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">]:</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Returns a random type from :class:`RANDOM_FUNC_BY_TYPE`</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">value_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">total_items</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="n">w_complex</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">))</span> <span class="o">/</span> <span class="n">level</span> <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="n">w_simple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">w_complex</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">w_simple</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">w_complex</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)</span>
-        <span class="n">other_value_type</span> <span class="o">=</span> <span class="n">choices</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span> <span class="o">+</span> <span class="n">COMPLEX_TYPES</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">value_type</span> <span class="o">=</span> <span class="n">value_type</span> <span class="ow">or</span> <span class="n">other_value_type</span>
-        <span class="n">value_func</span> <span class="o">=</span> <span class="n">RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="n">value_type</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">value_type</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">or</span> <span class="n">value_type</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
-            <span class="n">value_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">value_func</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_items</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_func</span><span class="p">())</span></div>
+<span class="sd">    Args:</span>
+<span class="sd">        level: Controls how likely it is to get a complex type. Higher values</span>
+<span class="sd">            make it more unlikely. Values over :class:`MAX_LEVEL_DEPTH` returns</span>
+<span class="sd">            always :class:`SIMPLE_TYPES`.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A list of ``type``\ s from :class:`RANDOM_FUNC_BY_TYPE`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">level</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">w_complex</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">))</span> <span class="o">/</span> <span class="n">level</span> <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="n">MAX_LEVEL_DEPTH</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">w_simple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">w_complex</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">w_simple</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">w_complex</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">choices</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span> <span class="o">+</span> <span class="n">COMPLEX_TYPES</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="RandomDict">
-<a class="viewcode-back" href="../src/random_data.html#random_data.RandomDict">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dict that contains random items, but all keys are :class:`str`&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="randlist">
+<a class="viewcode-back" href="../src/random_data.html#random_data.randlist">[docs]</a>
+<span class="k">def</span> <span class="nf">randlist</span><span class="p">(</span>
+    <span class="n">value_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">total_items</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Createss a list that contains ``total_items`` random items, all of the same</span>
+<span class="sd">    type.</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">list_value_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">total_items</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="p">(</span><span class="n">random_string</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_items</span><span class="p">))</span>
-        <span class="n">w_complex</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">))</span> <span class="o">/</span> <span class="n">level</span> <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="k">else</span> <span class="mi">0</span>
-        <span class="n">w_simple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">w_complex</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span>
-        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="n">w_simple</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">w_complex</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">COMPLEX_TYPES</span><span class="p">)</span>
-        <span class="n">value_types</span> <span class="o">=</span> <span class="n">choices</span><span class="p">(</span><span class="n">SIMPLE_TYPES</span> <span class="o">+</span> <span class="n">COMPLEX_TYPES</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">total_items</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val_type</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">value_types</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">val_type</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
-                <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RandomDict</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">val_type</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
-                <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RandomList</span><span class="p">(</span><span class="n">value_type</span><span class="o">=</span><span class="n">list_value_type</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="n">val_type</span><span class="p">]()</span></div>
+<span class="sd">    Args:</span>
+<span class="sd">        value_type: One of the types in :class:`RANDOM_FUNC_BY_TYPE`. Defines</span>
+<span class="sd">            the type of the objects inside the list. If not given a random</span>
+<span class="sd">            type is selected</span>
+<span class="sd">        total_items: Total number of items in the list. Defaults to 10.</span>
+<span class="sd">        level: Controls how likely it is to get a complex type. Higher values</span>
+<span class="sd">            make it more unlikely. Values over :class:`MAX_LEVEL_DEPTH` returns</span>
+<span class="sd">            always :class:`SIMPLE_TYPES`.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A list filled with random items.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">value_type</span> <span class="o">=</span> <span class="n">value_type</span> <span class="ow">or</span> <span class="n">randtypes</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">value_func</span> <span class="o">=</span> <span class="n">_RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="n">value_type</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">value_type</span> <span class="ow">is</span> <span class="nb">list</span> <span class="ow">or</span> <span class="n">value_type</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">value_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">value_func</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_items</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_func</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">result</span></div>
 
 
 
-<span class="n">RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="n">RandomList</span>
-<span class="n">RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">RandomDict</span>
+<div class="viewcode-block" id="randdict">
+<a class="viewcode-back" href="../src/random_data.html#random_data.randdict">[docs]</a>
+<span class="k">def</span> <span class="nf">randdict</span><span class="p">(</span>
+    <span class="n">list_value_type</span><span class="p">:</span> <span class="nb">type</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">total_items</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">R</span><span class="sd">&quot;&quot;&quot;Dict that contains random items, but all keys are :class:`str`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        list_value_type: Type of items for :class:`list`\ s. If not given, it</span>
+<span class="sd">            can be any from :class:`RANDOM_FUNC_BY_TYPE`.</span>
+<span class="sd">        total_items: Number of items in the :class:`dict` without considering</span>
+<span class="sd">            nesting.</span>
+<span class="sd">        level: Controls how likely it is to get a complex type. Higher values</span>
+<span class="sd">            make it more unlikely. Values over :class:`MAX_LEVEL_DEPTH` returns</span>
+<span class="sd">            always :class:`SIMPLE_TYPES`. It increases automatically for nested</span>
+<span class="sd">            ``dict``\ s and ``list``\ s.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A ``dict`` filled with random items .</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">randstr</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_items</span><span class="p">))</span>
+    <span class="n">value_types</span> <span class="o">=</span> <span class="n">randtypes</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">total_items</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val_type</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">value_types</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val_type</span> <span class="ow">is</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">randdict</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val_type</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">randlist</span><span class="p">(</span>
+                <span class="n">value_type</span><span class="o">=</span><span class="n">list_value_type</span> <span class="ow">or</span> <span class="n">val_type</span><span class="p">,</span>
+                <span class="n">level</span><span class="o">=</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="n">val_type</span><span class="p">]()</span>
+    <span class="k">return</span> <span class="n">result</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">seed</span><span class="p">(</span><span class="mi">1122</span><span class="p">)</span>
-    <span class="n">RandomDict</span><span class="p">()</span>
+
+<span class="n">_RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="n">randlist</span>
+<span class="n">_RANDOM_FUNC_BY_TYPE</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">randdict</span>
 </pre></div>
         </article>
       </div>

@@ -17,7 +17,8 @@ help:
 
 rst:
 	sphinx-apidoc --force --separate --module-first \
-		--output-dir "$(SOURCEDIR)/src" ../src
+		--output-dir "$(SOURCEDIR)/src" ../src && \
+	rm "$(SOURCEDIR)/src/modules.rst"
 
 check:
 	$(BROWSER) $(PUBLISHDIR)/index.html

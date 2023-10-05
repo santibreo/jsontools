@@ -1,7 +1,6 @@
 # Setup -----------------------------------------------------------------------
 [project]
-name = "jsontools"
-version = "0.1.0"
+name = "pyjsontools"
 description = "Tools to edit and manipulate JSON formatted data"
 authors = [
     {name = "Santiago B. Perez Pita",    email="santibreo@gmail.com"},
@@ -15,11 +14,11 @@ keywords = ["json", "itertools"]
 classifiers = []
 
 # Might be dynamic
+version = "0.1.0"
 dependencies = []
 dynamic = []
 
 [tool.setuptools.dynamic]
-version = {attr = "jsontools.__version__"}
 # dependencies = {file = ["requirements.txt"]}
 optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
 

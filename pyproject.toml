@@ -1,22 +1,35 @@
 # Setup -----------------------------------------------------------------------
+#- https://packaging.python.org/en/latest/specifications/declaring-project-metadata
+#- https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
 [project]
 name = "pyjsontools"
 description = "Tools to edit and manipulate JSON formatted data"
+readme = 'README.rst'
 authors = [
     {name = "Santiago B. Perez Pita",    email="santibreo@gmail.com"},
 ]
 requires-python = ">=3.9"
-readme = "README.md"
-# license = {file = "LICENSE.txt"}
+#- https://choosealicense.com/
+license = {file = "LICENSE"}
 
 keywords = ["json", "itertools"]
 
-classifiers = []
+#- https://pypi.org/classifiers/
+classifiers = [
+  'Development Status :: 4 - Beta',
+  'Topic :: File Formats :: JSON',
+  'Topic :: File Formats :: JSON :: JSON Schema',
+]
 
 # Might be dynamic
-version = "0.1.0"
+version = "0.1.1"
 dependencies = []
 dynamic = []
+
+[project.urls]
+Repository = "https://github.com/santibreo/jsontools"
+Documentation = "https://santibreo.github.io/jsontools/index.html"
+# Changelog = "https://github.com/santibreo/jsontools/blob/master/CHANGELOG.md"
 
 [tool.setuptools.dynamic]
 # dependencies = {file = ["requirements.txt"]}

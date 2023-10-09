@@ -1,7 +1,7 @@
 exclude: >
   (?x)^(
-      docs/build/|
-      docs/source/_static/html/
+      sphinx/build/|
+      sphinx/source/_static/html/
   )$
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks

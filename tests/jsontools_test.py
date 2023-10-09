@@ -1,30 +1,31 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from unittest import mock
 from unittest import TestCase
 
 import jsontools
 import pytest
 
+TEST_JSON = {
+    'a': 1,
+    'b': {
+        'b-a': 1,
+        'b-b': {'b-b-a': 1, 'b-b-b': 2, 'b-b-c': [1, 2, 3]},
+        'b-c': [{'b-c-a': 1}, {'b-c-a': 2}],
+    },
+    'c': [
+        {'c-a': 1},
+        {'c-a': 2},
+        {'c-b': 2},
+        {'c-c': {'c-c-a': 1, 'c-c-b': 2, 'c-c-c': [1, 2, 3]}},
+    ],
+}
+
 
 class TestJsonTools(TestCase):
     def setUp(self) -> None:
         self.expected: list = []
-        self.test_json = {
-            'a': 1,
-            'b': {
-                'b-a': 1,
-                'b-b': {'b-b-a': 1, 'b-b-b': 2, 'b-b-c': [1, 2, 3]},
-                'b-c': [{'b-c-a': 1}, {'b-c-a': 2}],
-            },
-            'c': [
-                {'c-a': 1},
-                {'c-a': 2},
-                {'c-b': 2},
-                {'c-c': {'c-c-a': 1, 'c-c-b': 2, 'c-c-c': [1, 2, 3]}},
-            ],
-        }
+        self.test_json = deepcopy(TEST_JSON)
         self.test_nc_json = {
             'hello_world': {
                 'hello_world': [
@@ -98,58 +99,60 @@ def test_walk_structures(max_depth, expected_slices, test_case):
 
 
 @pytest.mark.parametrize(
-    'field,expected',
+    'key_pattern,expected',
     [
-        ('a', [{'a': [1]}]),
-        ('b/b-a', [{'b/b-a': [1]}]),
-        ('b/?/b-b-a', [{'b/?/b-b-a': [1]}]),
-        ('b-c/b-c-a', [{'b-c/b-c-a': [1, 2]}]),
-        ('c-c-c', [{'c-c-c': [[1, 2, 3]]}]),
+        ('-', []),
+        ('a', [('a', 1)]),
+        ('b/b-a', [('b/b-a', 1)]),
+        ('b/.*/b-b-a', [('b/b-b/b-b-a', 1)]),
+        ('b-c/b-c-a', []),
+        (r'.*/b-c\[\d\]/b-c-a', [('b/b-c[0]/b-c-a', 1), ('b/b-c[1]/b-c-a', 2)]),
+        (r'[^/]\[\d\]/(c-a)', [('c-a', 1), ('c-a', 2)]),
+        ('.*/(c-c-c)', [('c-c-c', [1, 2, 3])]),
+        ('.*/(?:c-c-c)', [('c[3]/c-c/c-c-c', [1, 2, 3])]),
     ],
 )
-def test_search(field, expected, test_case):
-    result = list(jsontools.search(test_case.test_json, field))
+def test_query_keys(key_pattern, expected, test_case):
+    result = list(jsontools.query_keys(test_case.test_json, key_pattern))
     test_case.assertListEqual(result, expected)
 
 
-def test_search_multiple(test_case: TestJsonTools):
-    with mock.patch(
-        'jsontools.walk_structures',
-        side_effect=jsontools.walk_structures,
-    ) as walk_structures_patch:
-        _ = list(jsontools.search(test_case.test_json, 'a', 'b', 'c/c-a'))
-        test_case.assertEqual(
-            walk_structures_patch.call_count,
-            2,
-            'walk_structures called different times than expected',
-        )
-        call = walk_structures_patch.call_args_list[0]
-        test_case.assertEqual(
-            len(call.args),
-            1,
-            'walk_structures called with too many args',
-        )
-        test_case.assertDictEqual(
-            call.args[0],
-            test_case.test_json,
-            'walk_structures not called with test_json',
-        )
-        call = walk_structures_patch.call_args_list[1]
-        test_case.assertEqual(
-            len(call.args),
-            1,
-            'walk_structures called with too many args',
-        )
-        test_case.assertListEqual(
-            call.args[0],
-            test_case.test_json['c'],
-            "walk_structures not called with test_json['c']",
-        )
-        test_case.assertDictEqual(
-            call.kwargs,
-            {'max_depth': 1},
-            'walk_structures called without max_dept',
-        )
+@pytest.mark.parametrize(
+    'key_pattern,expected',
+    [
+        ('A', []),
+        ('a', [TEST_JSON]),
+        ('b/b-a', [TEST_JSON]),
+        ('b-c-a', TEST_JSON['b']['b-c']),
+        ('c-.', TEST_JSON['c']),
+        ('c-[a-b]', TEST_JSON['c'][:3]),
+        (r'b-c\[\d\]/b-c-a', [TEST_JSON['b']]),
+    ],
+)
+def test_search_by_keys_single(key_pattern, expected, test_case):
+    result = list(jsontools.search_by_keys(test_case.test_json, key_pattern))
+    test_case.assertListEqual(result, expected)
+
+
+@pytest.mark.parametrize(
+    'key_patterns,expected',
+    [
+        (('A',), []),
+        (('a',), [TEST_JSON]),
+        (('a', 'd'), []),
+        (('b-a', 'b-b', 'b-c'), [TEST_JSON['b']]),
+        (('b-a', 'b-b', 'b-c', 'b-d'), []),
+        (('b-[a-d]',), [TEST_JSON['b']]),
+        (('c-a', 'c-b', 'c-c'), []),
+        (('c-[a-b]',), TEST_JSON['c'][:3]),
+        (('c-[a-c]',), TEST_JSON['c']),
+    ],
+)
+def test_search_by_keys_multiple(key_patterns, expected, test_case: TestJsonTools):
+    result = list(
+        jsontools.search_by_keys(test_case.test_json, *key_patterns, all_=True),
+    )
+    test_case.assertListEqual(result, expected)
 
 
 def test_json_edit(test_case: TestJsonTools):

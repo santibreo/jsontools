@@ -205,76 +205,71 @@ def walk_structures(
     yield from inner_walk_structures(json_value, max_depth=max_depth)
 
 
-def search(
+def query_keys(
     json_content: JsonContent,
-    *fields: str,
-    all_: bool = False,
-) -> Iterator[dict[JsonKey, list[JsonValue]]]:
-    R"""Looks recursively in a JSON file for given fields. If ``all_`` is ``True``
-    only matches from internal structures that contain all fields are returned.
+    key_pattern: str,
+) -> Iterator[tuple[JsonKey, JsonValue]]:
+    """Query JSON structured data looking for keys that match given ``key_pattern``
+    as a `Python regexp <https://docs.python.org/3/library/re.html#regular-expression-syntax>`_
+
+    - To separate nested fields '/' is used
+    - To select listed items 0-indexed '[]' are used (only JSON items can be selected).
+
+    .. note:
+        To get only part of the matching flatten key (and not all) add a group to
+        your pattern, last group is returned. If you need a group but do not want
+        it as key, use non-capturing groups: '(?:...)'
+
+    .. see-also: :func:`flatten`
 
     Args:
         json_content: JSON structured content
-        \*fields: All the fields that are going to be extracted from the JSON
-        all_: If ``True`` only yields when all fields has been found. Otherwise
-            yields when any field has been found
+        key_pattern: Regexp compilable pattern
 
     Yields:
-        Dictionaries of found keys and values each time one JSON structure is
-        encountered
+        Each pair of key and value that matches given ``key_pattern``.
+
+    Raises:
+        ValueError: If ``key_pattern`` cannot be interpreted as regexp pattern
 
     """
+    try:
+        re_pattern = re.compile(key_pattern)
+    except re.error as error:
+        raise ValueError(f"Invalid regexp pattern '{key_pattern}'") from error
+    for key, value in flatten(json_content):
+        if match := re.fullmatch(re_pattern, key):
+            yield match.group(len(match.groups())), value
 
-    def single_query(
-        field: str,
-        json_struct: JsonContent,
-    ) -> tuple[bool, list[JsonValue]]:
-        """Searches fields at different nested levels (considering '.' as nest
-        level separator)"""
-        field_parts = list(map(str.strip, field.split('/')))
-        field = field_parts.pop(0)
-        field_value: JsonValue = json_struct.get(field)
-        field_values = [field_value]
-        # Final iteration
-        if not field_parts:
-            if field.endswith('?') and field_value is None:
-                return True, [json_struct]
-            return field_value is not None, field_values
-        # Middle iteration
-        if field_value is None and field.endswith('?'):
-            _, *inner_structs = walk_structures(json_struct, max_depth=1)
-        elif field_value is None:
-            return False, field_values
-        elif isinstance(field_value, dict):
-            inner_structs = [field_value]
-        else:
-            inner_structs = list(walk_structures(field_value, max_depth=1))
-        result: list[JsonValue] = []
-        for inner_struct in inner_structs:
-            inner_found, inner_result = single_query(
-                '/'.join(field_parts),
-                inner_struct,
-            )
-            if not inner_found:
-                continue
-            result.extend(inner_result)
-        return bool(result), result
 
-    # If _all require all fields to be defined, otherwise at least one
+def search_by_keys(
+    json_content: JsonContent,
+    *key_patterns: str,
+    all_: bool = False,
+) -> Iterator[JsonContent]:
+    R"""Looks recursively in a JSON file for JSON structures that contain given
+    ``key_patterns``. If ``all_`` is ``True`` only internal structures that
+    contain all ``key_patterns`` are returned.
+
+    Args:
+        json_content: JSON structured content
+        \*key_patterns: Regexp patterns to search for in each JSON structure
+        all_: If ``True`` only yields when all ``key_patterns`` have been found.
+            Otherwise yields when any any number of them have been found
+
+    Yields:
+        JSON structures that matches :func:`all` or :func:`any` of given
+        ``key_patterns``
+
+    """
     check: Callable[[Iterable[bool]], bool] = all if all_ else any
     for json_struct in walk_structures(json_content):
-        if not fields:
-            break
-        result: dict[str, list[JsonValue]] = {}
-        for field in fields:
-            found, values = single_query(field, json_struct)
-            if not found:
-                continue
-            result[field] = list(filter(None, values))
-        if not check(field in result for field in fields):
-            continue
-        fields = tuple(field for field in fields if field not in result)
-        yield result
+        to_check: list[bool] = []
+        for key_pattern in key_patterns:
+            key_result = dict(query_keys(json_struct, key_pattern))
+            to_check.append(bool(key_result))
+        if check(to_check):
+            yield json_struct
 
 
 def edit(

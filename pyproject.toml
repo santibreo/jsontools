@@ -31,12 +31,12 @@ Repository = "https://github.com/santibreo/jsontools"
 Documentation = "https://santibreo.github.io/jsontools/index.html"
 # Changelog = "https://github.com/santibreo/jsontools/blob/master/CHANGELOG.md"
 
+[tool.setuptools]
+packages = ["jsontools"]
+
 [tool.setuptools.dynamic]
 # dependencies = {file = ["requirements.txt"]}
 optional-dependencies = {dev = { file = ["requirements-dev.txt"] }}
-
-[tool.setuptools.packages.find]
-where = ["src"]
 
 # Toolz -----------------------------------------------------------------------
 [tool.pytest.ini_options]

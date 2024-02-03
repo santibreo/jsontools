@@ -6,12 +6,13 @@ from unittest import TestCase
 import jsontools
 import pytest
 
+
 TEST_JSON = {
     'a': 1,
     'b': {
         'b-a': 1,
         'b-b': {'b-b-a': 1, 'b-b-b': 2, 'b-b-c': [1, 2, 3]},
-        'b-c': [{'b-c-a': 1}, {'b-c-a': 2}],
+        'b-c': [{'b-c-a': 1, 'b-c-b': 2}, {'b-c-a': 2}],
     },
     'c': [
         {'c-a': 1},
@@ -55,6 +56,7 @@ def test_flatten(test_case):
         ('b/b-b/b-b-c', test_case.test_json['b']['b-b']['b-b-c']),
         ('b/b-c', test_case.test_json['b']['b-c']),
         ('b/b-c[0]/b-c-a', test_case.test_json['b']['b-c'][0]['b-c-a']),
+        ('b/b-c[0]/b-c-b', test_case.test_json['b']['b-c'][0]['b-c-b']),
         ('b/b-c[1]/b-c-a', test_case.test_json['b']['b-c'][1]['b-c-a']),
         ('c', test_case.test_json['c']),
         ('c[0]/c-a', test_case.test_json['c'][0]['c-a']),
@@ -96,6 +98,49 @@ def test_walk_structures(max_depth, expected_slices, test_case):
         expected.extend(expected_full[slice_])
     result = list(jsontools.walk_structures(test_case.test_json, max_depth=max_depth))
     test_case.assertListEqual(result, expected)
+
+
+@pytest.mark.parametrize(
+    'test_json',
+    list(jsontools.walk_structures(TEST_JSON))
+)
+def test_unflatten_dicts(test_json, test_case):
+    test_case.assertDictEqual(
+        test_json,
+        jsontools.unflatten(*iter(jsontools.flatten(test_json)))
+    )
+
+
+@pytest.mark.parametrize(
+    'test_list',
+    [
+        TEST_JSON['b']['b-c'],
+        TEST_JSON['c']
+    ]
+)
+def test_unflatten_list(test_list, test_case):
+    test_case.assertListEqual(
+        test_list,
+        jsontools.unflatten(*iter(jsontools.flatten(test_list)))
+    )
+
+
+@pytest.mark.parametrize(
+    'test_chunk_index, expected',
+    [
+        (3, {
+            'b-b': TEST_JSON['b']['b-b'],
+            'b-c': TEST_JSON['b']['b-c'],
+            'c': TEST_JSON['c'],
+        }),
+        (8, TEST_JSON['b']['b-c'] + [{'c': TEST_JSON['c']}]),
+        (10, TEST_JSON['b']['b-c'][1:] + [{'c': TEST_JSON['c']}]),
+    ]
+)
+def test_unflatten_partial(test_chunk_index, expected, test_case):
+    test_chunk = list(jsontools.flatten(TEST_JSON))[test_chunk_index:]
+    result = jsontools.unflatten(*test_chunk)
+    test_case.assertEqual(result, expected)
 
 
 @pytest.mark.parametrize(
